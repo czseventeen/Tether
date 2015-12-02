@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BlackText" parent="android:Widget.ListView">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+</resources>

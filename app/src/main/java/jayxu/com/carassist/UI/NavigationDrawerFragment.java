@@ -101,12 +101,12 @@ public class NavigationDrawerFragment extends Fragment {
         });
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
+                R.layout.navigation_drawer_text,
+                R.id.navigation_drawer_text,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
+                        getString(R.string.navigation_title_home),
+                        getString(R.string.navigation_title_mycar),
+                        getString(R.string.navigation_title_stat),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -132,7 +132,10 @@ public class NavigationDrawerFragment extends Fragment {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setIcon(R.drawable.ic_list_black_48dp);
+        actionBar.setElevation(10);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
@@ -238,7 +241,7 @@ public class NavigationDrawerFragment extends Fragment {
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
         if (mDrawerLayout != null && isDrawerOpen()) {
             inflater.inflate(R.menu.global, menu);
-            showGlobalContextActionBar();
+            //showGlobalContextActionBar();
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -265,7 +268,7 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
+        actionBar.setTitle(R.string.navigation_actionbar_title);
     }
 
     private ActionBar getActionBar() {

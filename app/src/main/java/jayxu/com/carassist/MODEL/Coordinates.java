@@ -1,4 +1,4 @@
-package app.my_car_assist.model;
+package jayxu.com.carassist.MODEL;
 
 /**
  * Created by Yuchen on 11/29/2015.

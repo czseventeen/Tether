@@ -3,7 +3,6 @@ package jayxu.com.carassist.UI;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -15,8 +14,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -37,7 +36,7 @@ import jayxu.com.carassist.R;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -65,12 +64,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         super.onCreate(savedInstanceState);
 
-        if(ParseUser.getCurrentUser()!=null) {
-            Intent mIntent= new Intent(LoginActivity.this, HomeActivity.class);
-            mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(mIntent);
-        }else{
+
            setContentView(R.layout.activity_login);
 
         mLoginFormView = findViewById(R.id.login_form);
@@ -102,7 +96,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                         } else {
                             Toast toast = Toast.makeText(LoginActivity.this, "Sign in Failed!", Toast.LENGTH_LONG);
                             toast.show();
-                            Log.w(">>>>>>>>>>>", e);
+                            //Log.w(">>>>>>>>>>>", e);
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("Sign in Failed!")
                                     .setTitle("Error")
@@ -123,9 +117,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 startActivity(intent);
             }
         });
-        }
-
     }
+
+
 
 
 

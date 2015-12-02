@@ -1,5 +1,4 @@
-package app.my_car_assist.model;
-
+package jayxu.com.carassist.MODEL;
 /**
  * Created by Yuchen on 11/29/2015.
  * This Class Contains all the Stats are going to be displayed in the MyStats Page
