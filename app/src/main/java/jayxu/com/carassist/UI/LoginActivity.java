@@ -38,13 +38,7 @@ import jayxu.com.carassist.R;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+    private static final String TAG= LoginActivity.class.getSimpleName();
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -82,15 +76,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 user.setEmail(email);
                 user.setUsername(email.split("@")[0]);
                 user.setPassword(password);
+
+
                 user.logInInBackground(user.getUsername(),password, new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (e == null) {
+
+
                             Toast toast = Toast.makeText(LoginActivity.this, "Sign in Success!", Toast.LENGTH_LONG);
                             toast.show();
                             Intent mIntent= new Intent(LoginActivity.this, HomeActivity.class);
                             mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                             startActivity(mIntent);
 
                         } else {
@@ -306,15 +305,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
 
-            // TODO: register the new account here.
             return true;
         }
 

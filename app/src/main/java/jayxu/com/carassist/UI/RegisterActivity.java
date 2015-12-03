@@ -26,16 +26,21 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import jayxu.com.carassist.MODEL.Home;
 import jayxu.com.carassist.R;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class RegisterActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
+    private static final String KEY_USERNAME = "username";
+    private static String VALUE_USERNAME= "";
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -70,21 +75,78 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 mPasswordView=(EditText)findViewById(R.id.register_password);
                 String email=mEmailView.getText().toString();
                 String password=mPasswordView.getText().toString();
-                System.out.println("+++++++++++++++Email was:"+email);
-                System.out.println("+++++++++++++++Password was:"+password);
+               // System.out.println("+++++++++++++++Email was:"+email);
+               // System.out.println("+++++++++++++++Password was:"+password);
 
                 ParseUser user=new ParseUser();
                 user.setEmail(email);
                 user.setUsername(email.split("@")[0]);
+                VALUE_USERNAME=user.getUsername();
                 user.setPassword(password);
+
+                Home home=new Home(-1);
+                //MyCar myCar=new MyCar(-1);
+                Log.w("------->", home.toString());
+                //Log.w("+++++++>", myCar.toString());
+
+                Boolean JSONExceptionCaught=false;
+                JSONArray HomeArray=new JSONArray();
+                // JSONArray MyCarArray=new JSONArray();
+                try {
+                    HomeArray=home.generateJSONArray();
+                    // MyCarArray=myCar.generateJSONArray();
+                } catch (JSONException e1) {
+                    Log.e(TAG, e1.toString());
+                    JSONExceptionCaught=true;
+                }
+                if(!JSONExceptionCaught){
+                    Log.w("---------->", HomeArray.toString());
+
+                    user.put("Home",HomeArray);
+                    user.put("Testing","123");
+
+                }
+
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
                         if(e==null){
-                            Log.w(TAG,"--------------Sign Up Success!");
+                            Log.w(TAG, "--------------Sign Up Success!");
 
                             Toast toast=Toast.makeText(RegisterActivity.this, "Sign Up Success!", Toast.LENGTH_LONG);
                             toast.show();
+
+//                            /*
+//                            The following code generates a random Home Object, convert it into a JSONArray and put into Parse.com associated with the user.
+//                            */
+//                            Home home=new Home(-1);
+//                            //MyCar myCar=new MyCar(-1);
+//                            Log.w("------->", home.toString());
+//                            //Log.w("+++++++>", myCar.toString());
+//
+//                            Boolean JSONExceptionCaught=false;
+//                            JSONArray HomeArray=new JSONArray();
+//                           // JSONArray MyCarArray=new JSONArray();
+//                            try {
+//                                HomeArray=home.generateJSONArray();
+//                               // MyCarArray=myCar.generateJSONArray();
+//                            } catch (JSONException e1) {
+//                                Log.e(TAG, e1.toString());
+//                                JSONExceptionCaught=true;
+//                            }
+//                            if(!JSONExceptionCaught){
+//                                Log.w("---------->", HomeArray.toString());
+//                                ParseObject parseObject = new ParseObject("CarAssist_UserData");
+//                                parseObject.put("HOME_PARAMS",HomeArray);
+//                              //  parseObject.put("MYCAR_PARAMS",MyCarArray);
+//                                parseObject.saveInBackground();
+//                            }
+
+
+
+
+
+
                             finish();
 
                         }else{

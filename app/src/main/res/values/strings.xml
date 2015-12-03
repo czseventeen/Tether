@@ -17,4 +17,12 @@
 
     <string name="hello_world">Hello world!</string>
 
+
+    <!-- below are used for the Home class-->
+    <string name="Healthy">Healthy</string>
+    <string name="NeedEngineCheck">Need Engine Check</string>
+    <string name="NeedOilChange">Need Oil Change</string>
+    <string name="TireFlat">Tire Need More Air</string>
+
+
 </resources>

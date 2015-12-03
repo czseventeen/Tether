@@ -56,13 +56,13 @@ public class HomeActivity extends AppCompatActivity
         switch(position){
             default:
             case 0:
-                fragment=HomeFragmentActivity.newInstance(position);
+                fragment= HomeFragment.newInstance(position);
                 break;
             case 1:
-                fragment=MyCarFragmentActivity.newInstance(position);
+                fragment= MyCarFragment.newInstance(position);
                 break;
             case 2:
-                fragment=StatFragmentActivity.newInstance(position);
+                fragment= StatFragment.newInstance(position);
                 break;
         }
         fragmentManager.beginTransaction()

@@ -12,7 +12,7 @@ import jayxu.com.carassist.R;
 /**
  * Created by Yuchen on 12/1/2015.
  */
-public class HomeFragmentActivity extends Fragment {
+public class HomeFragment extends Fragment {
 
         /**
          * The fragment argument representing the section number for this
@@ -24,15 +24,15 @@ public class HomeFragmentActivity extends Fragment {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static HomeFragmentActivity newInstance(int sectionNumber) {
-            HomeFragmentActivity fragment = new HomeFragmentActivity();
+        public static HomeFragment newInstance(int sectionNumber) {
+            HomeFragment fragment = new HomeFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
         }
 
-        public HomeFragmentActivity() {
+        public HomeFragment() {
         }
 
         @Override

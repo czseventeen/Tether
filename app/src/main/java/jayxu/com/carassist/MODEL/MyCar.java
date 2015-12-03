@@ -1,10 +1,15 @@
 package jayxu.com.carassist.MODEL;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.Random;
+
 /**
  * Created by Yuchen on 11/29/2015.
  * This class is used to Display Stats on the MyCar page
  */
 public class MyCar {
-    private Coordinates CarGPS;
     private double BatteryLeft;
     private double BatteryV;
     private double BatteryI;
@@ -20,6 +25,47 @@ public class MyCar {
     private double ZeroToSixtyTime;
     private double EstimateValue;
     private double TotalMilesDriven;
+    private Coordinates CarGPS;
+
+    /*
+    Below are the JSON index ids.
+     */
+    private static final int jBatteryLeft=0;
+    private static final int jBatteryV=1;
+    private static final int jBatteryI=2;
+    private static final int jBatteryR=3;
+    private static final int jBatteryTemp=4;
+    private static final int jBatteryCapacity=5;
+
+    public MyCar(){
+        CarGPS = null;
+        BatteryLeft = 0;
+        BatteryV = 0;
+        BatteryI = 0;
+        BatteryR = 0;
+        BatteryTemp = 0;
+        BatteryCapacity = 0;
+        FuelEconomy = 0;
+        Brand = "No Brand";
+        SeatingCapacity = 0;
+        HorsePower = 0;
+        MaxRPM = 0;
+        TopSpeed = 0;
+        ZeroToSixtyTime = 0;
+        EstimateValue = 0;
+        TotalMilesDriven = 0;
+    }
+
+    public MyCar(int i){
+        if(i==-1){
+            Random r=new Random();
+            BatteryLeft=r.nextDouble()*100;
+            BatteryV=r.nextDouble();
+            BatteryI=r.nextDouble();
+            BatteryR=r.nextDouble();
+        }
+
+    }
 
     public Coordinates getCarGPS() {
         return CarGPS;
@@ -147,5 +193,20 @@ public class MyCar {
 
     public void setTotalMilesDriven(double totalMilesDriven) {
         TotalMilesDriven = totalMilesDriven;
+    }
+
+    public JSONArray generateJSONArray() throws JSONException {
+        JSONArray myArray=new JSONArray();
+        myArray.put(jBatteryLeft,BatteryLeft);
+        myArray.put(jBatteryV,BatteryV);
+        myArray.put(jBatteryI,BatteryI);
+        myArray.put(jBatteryR,BatteryR);
+
+        return myArray;
+    }
+
+    @Override
+    public String toString(){
+        return "My Car has "+BatteryLeft+"% battery left";
     }
 }

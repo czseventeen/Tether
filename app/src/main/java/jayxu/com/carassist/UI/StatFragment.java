@@ -11,29 +11,28 @@ import jayxu.com.carassist.R;
 /**
  * Created by Yuchen on 12/1/2015.
  */
-public class MyCarFragmentActivity extends Fragment {
+public class StatFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
 
-    public static MyCarFragmentActivity newInstance(int sectionNumber) {
-        MyCarFragmentActivity fragment = new MyCarFragmentActivity();
+    public static StatFragment newInstance(int sectionNumber) {
+        StatFragment fragment = new StatFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public MyCarFragmentActivity() {
+    public StatFragment() {
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_mycar, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_stat, container, false);
+
 
         return rootView;
     }
-
-
 }
