@@ -1,10 +1,13 @@
 package jayxu.com.carassist.MODEL;
+
+import java.util.Random;
+
 /**
  * Created by Yuchen on 11/29/2015.
  * This Class Contains all the Stats are going to be displayed in the MyStats Page
  */
 public class MyStats {
-    private double DrivingScore;
+    private int DrivingScore;
     private double MilesDrivenSinceLastCharge;
     private double AverageMilesDrivenPerCharge;
     private double MaxMilesDrivenPerCharge;
@@ -25,11 +28,59 @@ public class MyStats {
     private double TotalMilesDriven;
     private double TotalMilesDrivenThisCharge;
 
-    public double getDrivingScore() {
+public MyStats(){
+        DrivingScore = 0;
+        MilesDrivenSinceLastCharge = 0;
+        AverageMilesDrivenPerCharge = 0;
+        MaxMilesDrivenPerCharge = 0;
+        FuelEconomy = 0;
+        FastestSpeedDriven = 0;
+        NumOfSuddenBreak = 0;
+        NumOfSuddenAccelerate = 0;
+        NumOfSuddenTurn = 0;
+        NumOfAccident = 0;
+        AverageSpeedDriven = 0;
+        DailyAverageDriveTime = 0;
+        AverageDrivingTimePerCharge = 0;
+        DailyAverageMilesDriven = 0;
+        MyAverageCostPerMile = 0;
+        TotalDrivingTime = 0;
+        TotalDrivingTimeThisCharge = 0;
+        TotalTimeSpentInTraffic = 0;
+        TotalMilesDriven = 0;
+        TotalMilesDrivenThisCharge = 0;
+    }
+
+    public MyStats(int i){
+        Random r= new Random();
+        DrivingScore = r.nextInt(100);
+        MilesDrivenSinceLastCharge = r.nextInt(500);
+        AverageMilesDrivenPerCharge =r.nextInt(500);
+        MaxMilesDrivenPerCharge = r.nextInt(500);
+        FuelEconomy = r.nextInt(500);
+        FastestSpeedDriven = r.nextInt(200);
+        NumOfSuddenBreak = r.nextInt(100);
+        NumOfSuddenAccelerate = r.nextInt(100);
+        NumOfSuddenTurn = r.nextInt(100);
+        NumOfAccident = r.nextInt(20);
+        AverageSpeedDriven = r.nextInt(100);
+        DailyAverageDriveTime = r.nextInt(180);
+        AverageDrivingTimePerCharge = r.nextInt(100);
+        DailyAverageMilesDriven = r.nextInt(500);
+        MyAverageCostPerMile = r.nextInt(10);
+        TotalDrivingTime = r.nextInt(500000);
+        TotalDrivingTimeThisCharge = r.nextInt(500);
+        TotalTimeSpentInTraffic = r.nextInt(200);
+        TotalMilesDriven = r.nextInt(200000);
+        TotalMilesDrivenThisCharge = r.nextInt(500);
+
+    }
+
+    public int getDrivingScore() {
         return DrivingScore;
     }
 
-    public void setDrivingScore(double drivingScore) {
+    public void setDrivingScore(int drivingScore) {
         DrivingScore = drivingScore;
     }
 
@@ -184,4 +235,6 @@ public class MyStats {
     public void setTotalMilesDrivenThisCharge(double totalMilesDrivenThisCharge) {
         TotalMilesDrivenThisCharge = totalMilesDrivenThisCharge;
     }
+
+
 }

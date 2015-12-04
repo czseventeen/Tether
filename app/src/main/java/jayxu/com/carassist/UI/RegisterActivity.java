@@ -22,17 +22,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jayxu.com.carassist.MODEL.Home;
+import jayxu.com.carassist.MODEL.MyCar;
+import jayxu.com.carassist.MODEL.MyStats;
 import jayxu.com.carassist.R;
 
 /**
@@ -83,30 +83,21 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 user.setUsername(email.split("@")[0]);
                 VALUE_USERNAME=user.getUsername();
                 user.setPassword(password);
+                /*
+                            The following code generates a random Home/MyCar/MyStats Object, convert it into a JSONArray and put into Parse.com associated with the user.
+                */
+                Home home = new Home(-1);
+                MyCar mycar=new MyCar(-1);
+                MyStats mystat=new MyStats(-1);
 
-                Home home=new Home(-1);
-                //MyCar myCar=new MyCar(-1);
-                Log.w("------->", home.toString());
-                //Log.w("+++++++>", myCar.toString());
+                Gson gson=new Gson();
+                String homeData=gson.toJson(home);
+                String mycarData=gson.toJson(mycar);
+                String mystatData=gson.toJson(mystat);
 
-                Boolean JSONExceptionCaught=false;
-                JSONArray HomeArray=new JSONArray();
-                // JSONArray MyCarArray=new JSONArray();
-                try {
-                    HomeArray=home.generateJSONArray();
-                    // MyCarArray=myCar.generateJSONArray();
-                } catch (JSONException e1) {
-                    Log.e(TAG, e1.toString());
-                    JSONExceptionCaught=true;
-                }
-                if(!JSONExceptionCaught){
-                    Log.w("---------->", HomeArray.toString());
-
-                    user.put("Home",HomeArray);
-                    user.put("Testing","123");
-
-                }
-
+                user.put("HOME_DATA",homeData);
+                user.put("MYCAR_DATA",mycarData);
+                user.put("MYSTAT_DATA",mystatData);
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -160,7 +151,6 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
             }
         });
-
         mLoginFormView = findViewById(R.id.register_form);
         mProgressView = findViewById(R.id.register_progress);
     }

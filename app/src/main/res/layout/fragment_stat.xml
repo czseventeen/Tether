@@ -18,15 +18,11 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:id="@+id/stat_list"
         android:layout_below="@id/home_imageView"
         android:layout_centerHorizontal="true"
-        />
-
-
-
-
+        android:layout_gravity="center_horizontal|bottom" />
 
 
 </FrameLayout>

@@ -149,5 +149,6 @@
     <orderEntry type="library" exported="" name="play-services-wallet-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="parse-android-1.11.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-8.3.0" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.5" level="project" />
   </component>
 </module>
