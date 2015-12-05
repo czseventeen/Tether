@@ -39,8 +39,7 @@ public class StatFragment extends Fragment {
         */
         ParseUser user=ParseUser.getCurrentUser();
         String results=user.getString("MYSTAT_DATA");
-        results.replace("{","");
-        results.replace("}", "");
+        results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
         String[] array_result=results.split(",");
 
 

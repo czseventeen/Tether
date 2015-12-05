@@ -3,6 +3,7 @@ package jayxu.com.carassist.UI;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -14,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,7 +36,7 @@ import jayxu.com.carassist.R;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private static final String TAG= LoginActivity.class.getSimpleName();
     /**
@@ -57,65 +57,72 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        //Hide actionbar for the login screen
+        //  ActionBar actionbar=getActionBar();
+        // actionbar.hide();
+        if (ParseUser.getCurrentUser() != null) {
+            Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
+            mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mIntent);
+        } else {
+            setContentView(R.layout.activity_login);
+
+            mProgressView = findViewById(R.id.login_progress);
+            mSignInButton = (Button) findViewById(R.id.login_button);
+            mSignInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ParseUser user = new ParseUser();
+                    // Retrieve what was typed and assign them to the ParseUser
+                    mEmailView = (AutoCompleteTextView) findViewById(R.id.login_email);
+                    mPasswordView = (EditText) findViewById(R.id.login_password);
+                    String email = mEmailView.getText().toString();
+                    String password = mPasswordView.getText().toString();
+                    user.setEmail(email);
+                    user.setUsername(email.split("@")[0]);
+                    user.setPassword(password);
 
 
-           setContentView(R.layout.activity_login);
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-        mSignInButton=(Button)findViewById(R.id.login_button);
-        mSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser user=new ParseUser();
-                // Retrieve what was typed and assign them to the ParseUser
-                mEmailView=(AutoCompleteTextView)findViewById(R.id.login_email);
-                mPasswordView=(EditText)findViewById(R.id.login_password);
-                String email=mEmailView.getText().toString();
-                String password=mPasswordView.getText().toString();
-                user.setEmail(email);
-                user.setUsername(email.split("@")[0]);
-                user.setPassword(password);
+                    user.logInInBackground(user.getUsername(), password, new LogInCallback() {
+                        @Override
+                        public void done(ParseUser user, ParseException e) {
+                            if (e == null) {
 
 
-                user.logInInBackground(user.getUsername(),password, new LogInCallback() {
-                    @Override
-                    public void done(ParseUser user, ParseException e) {
-                        if (e == null) {
+                                Toast toast = Toast.makeText(LoginActivity.this, "Sign in Success!", Toast.LENGTH_LONG);
+                                toast.show();
+                                Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                                mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+                                startActivity(mIntent);
 
-                            Toast toast = Toast.makeText(LoginActivity.this, "Sign in Success!", Toast.LENGTH_LONG);
-                            toast.show();
-                            Intent mIntent= new Intent(LoginActivity.this, HomeActivity.class);
-                            mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                            startActivity(mIntent);
-
-                        } else {
-                            Toast toast = Toast.makeText(LoginActivity.this, "Sign in Failed!", Toast.LENGTH_LONG);
-                            toast.show();
-                            //Log.w(">>>>>>>>>>>", e);
-                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                            builder.setMessage("Sign in Failed!")
-                                    .setTitle("Error")
-                                    .setPositiveButton("OK", null);
-                            builder.show();
+                            } else {
+                                Toast toast = Toast.makeText(LoginActivity.this, "Sign in Failed!", Toast.LENGTH_LONG);
+                                toast.show();
+                                //Log.w(">>>>>>>>>>>", e);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setMessage("Sign in Failed!")
+                                        .setTitle("Error")
+                                        .setPositiveButton("OK", null);
+                                builder.show();
+                            }
                         }
-                    }
-                });
+                    });
 
-            }
-        });
-    // Invoke RegisterActivity on pressing the Register text.
-        mRegisterText=(TextView)findViewById(R.id.register_text);
-        mRegisterText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+                }
+            });
+            // Invoke RegisterActivity on pressing the Register text.
+            mRegisterText = (TextView) findViewById(R.id.register_text);
+            mRegisterText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
 

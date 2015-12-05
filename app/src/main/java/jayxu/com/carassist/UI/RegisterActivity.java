@@ -3,6 +3,7 @@ package jayxu.com.carassist.UI;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -12,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +38,7 @@ import jayxu.com.carassist.R;
 /**
  * A login screen that offers login via email/password.
  */
-public class RegisterActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor> {
     private static final String KEY_USERNAME = "username";
     private static String VALUE_USERNAME= "";
     /**
@@ -106,38 +106,6 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
                             Toast toast=Toast.makeText(RegisterActivity.this, "Sign Up Success!", Toast.LENGTH_LONG);
                             toast.show();
-
-//                            /*
-//                            The following code generates a random Home Object, convert it into a JSONArray and put into Parse.com associated with the user.
-//                            */
-//                            Home home=new Home(-1);
-//                            //MyCar myCar=new MyCar(-1);
-//                            Log.w("------->", home.toString());
-//                            //Log.w("+++++++>", myCar.toString());
-//
-//                            Boolean JSONExceptionCaught=false;
-//                            JSONArray HomeArray=new JSONArray();
-//                           // JSONArray MyCarArray=new JSONArray();
-//                            try {
-//                                HomeArray=home.generateJSONArray();
-//                               // MyCarArray=myCar.generateJSONArray();
-//                            } catch (JSONException e1) {
-//                                Log.e(TAG, e1.toString());
-//                                JSONExceptionCaught=true;
-//                            }
-//                            if(!JSONExceptionCaught){
-//                                Log.w("---------->", HomeArray.toString());
-//                                ParseObject parseObject = new ParseObject("CarAssist_UserData");
-//                                parseObject.put("HOME_PARAMS",HomeArray);
-//                              //  parseObject.put("MYCAR_PARAMS",MyCarArray);
-//                                parseObject.saveInBackground();
-//                            }
-
-
-
-
-
-
                             finish();
 
                         }else{

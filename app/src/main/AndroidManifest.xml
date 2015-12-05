@@ -18,30 +18,36 @@
         <activity
             android:name=".UI.LoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
-            android:name=".UI.HomeActivity"
-            android:label="@string/title_activity_home" >
-        </activity>
-        <activity
-            android:name=".UI.RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:parentActivityName="jayxu.com.carassist.UI.LoginActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="jayxu.com.carassist.UI.LoginActivity" />
-        </activity>
-        <activity
-            android:name=".UI.LoadingActivity"
-            android:label="@string/title_activity_loading" >
+            android:windowSoftInputMode="adjustResize|stateVisible"
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UI.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme"
+            >
+        </activity>
+        <activity
+            android:name=".UI.RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName="jayxu.com.carassist.UI.LoginActivity"
+            android:windowSoftInputMode="adjustResize|stateVisible"
+            android:theme="@style/LoginTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="jayxu.com.carassist.UI.LoginActivity" />
+        </activity>
+        <!--<activity-->
+            <!--android:name=".UI.LoadingActivity"-->
+            <!--android:label="@string/title_activity_loading"-->
+            <!--android:theme="@style/AppTheme">-->
+
+        <!--</activity>-->
     </application>
 
 </manifest>

@@ -6,6 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.parse.ParseUser;
 
 import jayxu.com.carassist.R;
 
@@ -38,7 +42,17 @@ public class HomeFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            ParseUser user=ParseUser.getCurrentUser();
+            String results=user.getString("HOME_DATA");
+            results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
+            String[] array_result=results.split(",");
+
+
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+            ListView listview=(ListView)rootView.findViewById(R.id.home_list);
+            listview.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.list_text,R.id.list_text, array_result));
+
+
             return rootView;
         }
 

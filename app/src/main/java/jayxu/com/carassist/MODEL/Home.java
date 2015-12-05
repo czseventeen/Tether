@@ -1,8 +1,5 @@
 package jayxu.com.carassist.MODEL;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.Random;
 
 /**
@@ -14,24 +11,16 @@ public class Home {
 
     private double MoneySavedByDrivingElectric;
     private boolean CarMovingWhileUserAway;
-    private Coordinates UserGPS;
-    private Coordinates CarGPS;
+    private double CarGPS_X;
+    private double CarGPS_Y;
+    private double UserGPS_X;
+    private double UserGPS_Y;
     private String HealthSummary;
 
 
 
     private static final int MoneySave_max=10000;
     private static final String[] HealthStringArray = {"Is Healthy", "Need Engine Check", "Need Oil Change","Tire Need More Air"};
-
-    /*
-    These are placeholder IDs for the array Index.
-     */
-    private static final int jMoneySavedByDrivingElectric =0;
-    private static final int jUserGPS=1;
-    private static final int jCarGPS=2;
-    private static final int jHealth=3;
-
-
 
     public Home(){
 
@@ -44,12 +33,48 @@ public class Home {
         if(i==-1){
             Random r= new Random();
             this.setMoneySavedByDrivingElectric(r.nextInt(MoneySave_max));
-            this.setCarGPS(new Coordinates(-1));
-            this.setUserGPS(new Coordinates(-1));
+            this.setCarGPS_X(r.nextDouble() * 90);
+            this.setCarGPS_Y(r.nextDouble()*180);
+            this.setUserGPS_X(r.nextDouble()*90);
+            this.setUserGPS_Y(r.nextDouble()*180);
             this.setHealthSummary(HealthStringArray[r.nextInt(HealthStringArray.length)]);
         }
 
     }
+
+
+    public double getCarGPS_X() {
+        return CarGPS_X;
+    }
+
+    public void setCarGPS_X(double carGPS_X) {
+        CarGPS_X = carGPS_X;
+    }
+
+    public double getCarGPS_Y() {
+        return CarGPS_Y;
+    }
+
+    public void setCarGPS_Y(double carGPS_Y) {
+        CarGPS_Y = carGPS_Y;
+    }
+
+    public double getUserGPS_X() {
+        return UserGPS_X;
+    }
+
+    public void setUserGPS_X(double userGPS_X) {
+        UserGPS_X = userGPS_X;
+    }
+
+    public double getUserGPS_Y() {
+        return UserGPS_Y;
+    }
+
+    public void setUserGPS_Y(double userGPS_Y) {
+        UserGPS_Y = userGPS_Y;
+    }
+
     public double getMoneySavedByDrivingElectric() {
         return MoneySavedByDrivingElectric;
     }
@@ -66,21 +91,6 @@ public class Home {
         CarMovingWhileUserAway = carMovingWhileUserAway;
     }
 
-    public Coordinates getUserGPS() {
-        return UserGPS;
-    }
-
-    public void setUserGPS(Coordinates userGPS) {
-        UserGPS = userGPS;
-    }
-
-    public Coordinates getCarGPS() {
-        return CarGPS;
-    }
-
-    public void setCarGPS(Coordinates carGPS) {
-        CarGPS = carGPS;
-    }
 
     public String getHealthSummary() {
         return HealthSummary;
@@ -92,11 +102,11 @@ public class Home {
 
     @Override
     public String toString(){
-        return "The car is located at "+this.getCarGPS().toString()+", you are located at "+this.getUserGPS().toString()+", the money you have saved by using electric is "
+        return "The car is located at "+this.getCarGPS_X()+","+this.getCarGPS_Y()+", the money you have saved by using electric is "
                 +this.getMoneySavedByDrivingElectric()+", and you car is "+HealthSummary+".";
     }
 
-    public JSONArray generateJSONArray() throws JSONException {
+/*    public JSONArray generateJSONArray() throws JSONException {
         JSONArray myArray=new JSONArray();
         myArray.put(jMoneySavedByDrivingElectric,MoneySavedByDrivingElectric);
         //myArray.put(jCarGPS,CarGPS);
@@ -104,6 +114,6 @@ public class Home {
         myArray.put(jHealth,HealthSummary);
 
         return myArray;
-    }
+    }*/
 
 }

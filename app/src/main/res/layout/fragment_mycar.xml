@@ -1,31 +1,37 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="jayxu.com.carassist.UI.MyCarFragment"
-    android:background="@color/Green200">
+    android:background="@color/apptheme_color"
+    android:baselineAligned="false">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
         android:id="@+id/mycar_imageView"
         android:src="@drawable/teslax"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:adjustViewBounds="true"
         />
 
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="80"
         android:id="@+id/mycar_list"
         android:layout_below="@id/home_imageView"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="#ffffffff" />
 
 
 
 
 
 
-</FrameLayout>
+</LinearLayout>

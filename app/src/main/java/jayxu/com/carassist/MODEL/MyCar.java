@@ -1,8 +1,5 @@
 package jayxu.com.carassist.MODEL;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.Random;
 
 /**
@@ -25,7 +22,6 @@ public class MyCar {
     private double ZeroToSixtyTime;
     private double EstimateValue;
     private double TotalMilesDriven;
-    private Coordinates CarGPS;
 
     /*
     Below are the JSON index ids.
@@ -38,7 +34,6 @@ public class MyCar {
     private static final int jBatteryCapacity=5;
 
     public MyCar(){
-        CarGPS = null;
         BatteryLeft = 0;
         BatteryV = 0;
         BatteryI = 0;
@@ -63,17 +58,22 @@ public class MyCar {
             BatteryV=r.nextDouble();
             BatteryI=r.nextDouble();
             BatteryR=r.nextDouble();
+            BatteryTemp =r.nextDouble()*100;
+            BatteryCapacity = r.nextInt(500);
+            FuelEconomy = r.nextInt(100);
+            Brand = "No Brand";
+            SeatingCapacity = r.nextInt(2)+5;
+            HorsePower = r.nextInt(500)+200;
+            MaxRPM = r.nextInt(3000)+6000;
+            TopSpeed = r.nextInt(100)+110;
+            ZeroToSixtyTime = r.nextDouble()*6+1.7;
+            EstimateValue = r.nextInt(50000)+2000;
+            TotalMilesDriven = r.nextInt(200000);
         }
 
     }
 
-    public Coordinates getCarGPS() {
-        return CarGPS;
-    }
 
-    public void setCarGPS(Coordinates carGPS) {
-        CarGPS = carGPS;
-    }
 
     public double getBatteryLeft() {
         return BatteryLeft;
@@ -195,7 +195,7 @@ public class MyCar {
         TotalMilesDriven = totalMilesDriven;
     }
 
-    public JSONArray generateJSONArray() throws JSONException {
+/*    public JSONArray generateJSONArray() throws JSONException {
         JSONArray myArray=new JSONArray();
         myArray.put(jBatteryLeft,BatteryLeft);
         myArray.put(jBatteryV,BatteryV);
@@ -203,7 +203,7 @@ public class MyCar {
         myArray.put(jBatteryR,BatteryR);
 
         return myArray;
-    }
+    }*/
 
     @Override
     public String toString(){

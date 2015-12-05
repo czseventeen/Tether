@@ -14,4 +14,7 @@
     <item name="GreenA200" type="color">#69F0AE</item>
     <item name="GreenA300" type="color">#00E676</item>
     <item name="GreenA400" type="color">#00C853</item>
+
+    <color name="apptheme_color">#a6c961</color>
+
 </resources>
