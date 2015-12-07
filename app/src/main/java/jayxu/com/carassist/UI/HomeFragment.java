@@ -42,6 +42,7 @@ public class HomeFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            //Everytime on createView, populate the list with data.
             ParseUser user=ParseUser.getCurrentUser();
             String results=user.getString("HOME_DATA");
             results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");

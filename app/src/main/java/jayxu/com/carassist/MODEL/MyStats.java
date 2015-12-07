@@ -18,10 +18,10 @@ public class MyStats {
     private int NumOfSuddenTurn;
     private int NumOfAccident;
     private double AverageSpeedDriven;
-    private double DailyAverageDriveTime;
+    private double AverageDailyDriveTime;
     private double AverageDrivingTimePerCharge;
-    private double DailyAverageMilesDriven;
-    private double MyAverageCostPerMile;
+    private double AverageDailyMilesDriven;
+    private double AverageCostPerMile;
     private double TotalDrivingTime;
     private double TotalDrivingTimeThisCharge;
     private double TotalTimeSpentInTraffic;
@@ -30,20 +30,24 @@ public class MyStats {
 
 public MyStats(){
         DrivingScore = 0;
-        MilesDrivenSinceLastCharge = 0;
+
         AverageMilesDrivenPerCharge = 0;
+        AverageSpeedDriven = 0;
+        AverageDailyDriveTime = 0;
+        AverageDrivingTimePerCharge = 0;
+        AverageDailyMilesDriven = 0;
+        AverageCostPerMile = 0;
+
+        MilesDrivenSinceLastCharge = 0;
         MaxMilesDrivenPerCharge = 0;
         FuelEconomy = 0;
         FastestSpeedDriven = 0;
+
         NumOfSuddenBreak = 0;
         NumOfSuddenAccelerate = 0;
         NumOfSuddenTurn = 0;
         NumOfAccident = 0;
-        AverageSpeedDriven = 0;
-        DailyAverageDriveTime = 0;
-        AverageDrivingTimePerCharge = 0;
-        DailyAverageMilesDriven = 0;
-        MyAverageCostPerMile = 0;
+
         TotalDrivingTime = 0;
         TotalDrivingTimeThisCharge = 0;
         TotalTimeSpentInTraffic = 0;
@@ -64,10 +68,10 @@ public MyStats(){
         NumOfSuddenTurn = r.nextInt(100);
         NumOfAccident = r.nextInt(20);
         AverageSpeedDriven = r.nextInt(100);
-        DailyAverageDriveTime = r.nextInt(180);
+        AverageDailyDriveTime = r.nextInt(180);
         AverageDrivingTimePerCharge = r.nextInt(100);
-        DailyAverageMilesDriven = r.nextInt(500);
-        MyAverageCostPerMile = r.nextInt(10);
+        AverageDailyMilesDriven = r.nextInt(500);
+        AverageCostPerMile = r.nextInt(10);
         TotalDrivingTime = r.nextInt(500000);
         TotalDrivingTimeThisCharge = r.nextInt(500);
         TotalTimeSpentInTraffic = r.nextInt(200);
@@ -164,12 +168,12 @@ public MyStats(){
         AverageSpeedDriven = averageSpeedDriven;
     }
 
-    public double getDailyAverageDriveTime() {
-        return DailyAverageDriveTime;
+    public double getAverageDailyDriveTime() {
+        return AverageDailyDriveTime;
     }
 
-    public void setDailyAverageDriveTime(double dailyAverageDriveTime) {
-        DailyAverageDriveTime = dailyAverageDriveTime;
+    public void setAverageDailyDriveTime(double averageDailyDriveTime) {
+        AverageDailyDriveTime = averageDailyDriveTime;
     }
 
     public double getAverageDrivingTimePerCharge() {
@@ -180,20 +184,20 @@ public MyStats(){
         AverageDrivingTimePerCharge = averageDrivingTimePerCharge;
     }
 
-    public double getDailyAverageMilesDriven() {
-        return DailyAverageMilesDriven;
+    public double getAverageDailyMilesDriven() {
+        return AverageDailyMilesDriven;
     }
 
-    public void setDailyAverageMilesDriven(double dailyAverageMilesDriven) {
-        DailyAverageMilesDriven = dailyAverageMilesDriven;
+    public void setAverageDailyMilesDriven(double averageDailyMilesDriven) {
+        AverageDailyMilesDriven = averageDailyMilesDriven;
     }
 
-    public double getMyAverageCostPerMile() {
-        return MyAverageCostPerMile;
+    public double getAverageCostPerMile() {
+        return AverageCostPerMile;
     }
 
-    public void setMyAverageCostPerMile(double myAverageCostPerMile) {
-        MyAverageCostPerMile = myAverageCostPerMile;
+    public void setAverageCostPerMile(double averageCostPerMile) {
+        AverageCostPerMile = averageCostPerMile;
     }
 
     public double getTotalDrivingTime() {
@@ -236,5 +240,8 @@ public MyStats(){
         TotalMilesDrivenThisCharge = totalMilesDrivenThisCharge;
     }
 
-
+    @Override
+    public String toString() {
+        return "Daily Average,";
+    }
 }
