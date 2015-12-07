@@ -2,14 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="New Text"
-        android:id="@+id/list_text"
-        android:layout_gravity="left"
+        android:id="@+id/item_description"
         android:background="#00FFFFFF"
-        android:textSize="20dp"/>
+        android:textSize="12dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:layout_weight="1"
+        android:id="@+id/item_value"
+        android:background="#00FFFFFF"
+        android:textSize="12dp"
+        android:gravity="end" />
 </LinearLayout>

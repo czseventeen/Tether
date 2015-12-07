@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.parse.ParseUser;
 
@@ -50,8 +48,12 @@ public class HomeFragment extends Fragment {
 
 
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            ListView listview=(ListView)rootView.findViewById(R.id.home_list);
-            listview.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.list_text,R.id.list_text, array_result));
+
+            /*
+            Stopped using ListView
+             */
+//            ListView listview=(ListView)rootView.findViewById(R.id.home_list);
+//            listview.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.list_text,R.id.list_text, array_result));
 
 
             return rootView;
