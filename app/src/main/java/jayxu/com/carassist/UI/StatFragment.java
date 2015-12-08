@@ -10,7 +10,11 @@ import android.view.ViewGroup;
 
 import com.parse.ParseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import jayxu.com.carassist.ADAPTER.MyStatAdapter;
 import jayxu.com.carassist.MODEL.ItemData;
@@ -40,42 +44,67 @@ public class StatFragment extends Fragment {
         * Use the following section of code to grab the current user's Mystat page data
         */
         ParseUser user=ParseUser.getCurrentUser();
-        String results=user.getString("MYSTAT_DATA");
-        results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
-        String[] array_result=results.split(",");
-        //Converting the results into a Array of ItemData
-        ArrayList<ItemData> dataArray=new ArrayList<ItemData>();
-        ArrayList<ItemData> dataArray2=new ArrayList<ItemData>();
+        JSONObject mystat_results = null;
+        ArrayList<ItemData> itemData_list=new ArrayList<>();
+        try {
+             mystat_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyStat_Title));
 
-        for(int i=0; i<array_result.length;i++)
-        {
-            String [] temp=array_result[i].split(":");
-            ItemData tempdata=new ItemData();
-            tempdata.setDescription(temp[0]);
-            tempdata.setValue(temp[1]);
-            if(temp[0].contains("Average")) {
-                dataArray.add(tempdata);
-            }
-            else if(temp[0].contains("Total")){
-                dataArray2.add(tempdata);
+        if(mystat_results!=null){
+            Iterator<String> iterator=mystat_results.keys();
+            while(iterator.hasNext()){
+                ItemData temp_item=new ItemData();
+                String key=iterator.next();
+                temp_item.setDescription(key);
+                temp_item.setValue(mystat_results.getString(key));
+                itemData_list.add(temp_item);
             }
 
+        }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }
 
 
 
-        View rootView = inflater.inflate(R.layout.fragment_stat, container, false);
-        MyStatAdapter adapter=new MyStatAdapter(dataArray);
-        RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.stat_recycleView);
+        //Below were the old way of parsing the String data returned from Parse.com
+//        String results=user.getString("MYSTAT_DATA");
+//        results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
+//        String[] array_result=results.split(",");
+//        //Converting the results into a Array of ItemData
+//        ArrayList<ItemData> dataArray=new ArrayList<ItemData>();
+//        ArrayList<ItemData> dataArray2=new ArrayList<ItemData>();
+//
+//        for(int i=0; i<array_result.length;i++)
+//        {
+//            String [] temp=array_result[i].split(":");
+//            ItemData tempdata=new ItemData();
+//            tempdata.setDescription(temp[0]);
+//            tempdata.setValue(temp[1]);
+//            if(temp[0].contains("Average")) {
+//                dataArray.add(tempdata);
+//            }
+//            else if(temp[0].contains("Total")){
+//                dataArray2.add(tempdata);
+//            }
+//
+//        }
+
+
+
+        View rootView = inflater.inflate(R.layout.fragment_all, container, false);
+        MyStatAdapter adapter=new MyStatAdapter(itemData_list);
+        RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.Stat_recycleView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
-        MyStatAdapter adapter2=new MyStatAdapter(dataArray2);
-        RecyclerView recyclerView2=(RecyclerView)rootView.findViewById(R.id.stat_recycleView2);
-        recyclerView2.setAdapter(adapter2);
-        recyclerView2.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-        recyclerView2.setHasFixedSize(true);
+//        MyStatAdapter adapter2=new MyStatAdapter(dataArray2);
+//        RecyclerView recyclerView2=(RecyclerView)rootView.findViewById(R.id.stat_recycleView2);
+//        recyclerView2.setAdapter(adapter2);
+//        recyclerView2.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+//        recyclerView2.setHasFixedSize(true);
 
 
 

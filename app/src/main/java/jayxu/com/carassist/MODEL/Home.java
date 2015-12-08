@@ -1,6 +1,13 @@
 package jayxu.com.carassist.MODEL;
 
+import android.content.Context;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
+
+import jayxu.com.carassist.R;
 
 /**
  * Created by Yuchen on 11/29/2015.
@@ -42,6 +49,13 @@ public class Home {
 
     }
 
+    public JSONObject getJSON(Context context) throws JSONException {
+        JSONObject jsonobj=new JSONObject();
+        jsonobj.put(context.getString(R.string.MoneySavedByDrivingElectric),"$"+this.getMoneySavedByDrivingElectric());
+        jsonobj.put(context.getString(R.string.HealthSummary), this.getHealthSummary());
+
+        return jsonobj;
+    }
 
     public double getCarGPS_X() {
         return CarGPS_X;

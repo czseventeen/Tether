@@ -2,12 +2,23 @@ package jayxu.com.carassist.UI;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.parse.ParseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import jayxu.com.carassist.ADAPTER.MyStatAdapter;
+import jayxu.com.carassist.MODEL.ItemData;
 import jayxu.com.carassist.R;
 
 /**
@@ -34,12 +45,37 @@ public class MyCarFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ParseUser user=ParseUser.getCurrentUser();
-        String results=user.getString("MYCAR_DATA");
-        results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
-        String[] array_result=results.split(",");
+        JSONObject mycar_results = null;
+        ArrayList<ItemData> itemData_list=new ArrayList<>();
+        try {
+            mycar_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyCar_Title));
 
+            if(mycar_results!=null){
+                Iterator<String> iterator=mycar_results.keys();
+                while(iterator.hasNext()){
+                    ItemData temp_item=new ItemData();
+                    String key=iterator.next();
+                    temp_item.setDescription(key);
+                    temp_item.setValue(mycar_results.getString(key));
+                    itemData_list.add(temp_item);
+                }
 
-        View rootView = inflater.inflate(R.layout.fragment_mycar, container, false);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+        View rootView = inflater.inflate(R.layout.fragment_all, container, false);
+        ImageView TopImage=(ImageView)rootView.findViewById(R.id.Top_imageView);
+        TopImage.setImageResource(R.drawable.teslar);
+
+        MyStatAdapter adapter=new MyStatAdapter(itemData_list);
+        RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.Stat_recycleView);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setHasFixedSize(true);
 
 /*   Stop using ListView
      ListView listview=(ListView)rootView.findViewById(R.id.mycar_list);

@@ -19,15 +19,23 @@ android {
     }
 }
 
+ext {
+    supportLibVersion = '23.1.1'  // variable that can be referenced to keep support libs consistent
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.0.+'
     compile 'com.android.support:cardview-v7:23.0.+'
     compile 'com.android.support:recyclerview-v7:23.0.+'
+    compile "com.android.support:design:23.0.+"
+
     compile 'com.google.android.gms:play-services:8.3.0'
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.parse:parse-android:1.+'
     compile files('libs/gson-2.5.jar')
     compile 'com.jakewharton:butterknife:7.0.1'
+
+
 
 }
