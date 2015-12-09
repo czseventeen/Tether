@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.parse.ParseUser;
 
 import org.json.JSONException;
@@ -46,17 +47,25 @@ public class StatFragment extends Fragment {
         ParseUser user=ParseUser.getCurrentUser();
         JSONObject mystat_results = null;
         ArrayList<ItemData> itemData_list=new ArrayList<>();
+        float drivingScore=0;
         try {
-             mystat_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyStat_Title));
+             mystat_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyStat_JSON_KEY));
 
         if(mystat_results!=null){
             Iterator<String> iterator=mystat_results.keys();
             while(iterator.hasNext()){
                 ItemData temp_item=new ItemData();
+
                 String key=iterator.next();
+
                 temp_item.setDescription(key);
                 temp_item.setValue(mystat_results.getString(key));
+                if(key.equals(getString(R.string.DrivingScore))){
+                    drivingScore=Float.valueOf(temp_item.getValue());
+                    continue;
+                }
                 itemData_list.add(temp_item);
+
             }
 
         }
@@ -93,12 +102,21 @@ public class StatFragment extends Fragment {
 
 
 
-        View rootView = inflater.inflate(R.layout.fragment_all, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_stat, container, false);
         MyStatAdapter adapter=new MyStatAdapter(itemData_list);
         RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.Stat_recycleView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
+
+//       Modify the TopView Progress Circle based on Driving Score
+        DonutProgress dount=(DonutProgress)rootView.findViewById(R.id.donut_progress);
+        dount.setProgress((int) drivingScore);
+        if(drivingScore >= 70){
+            dount.setFinishedStrokeColor(getResources().getColor(R.color.apptheme_color));
+        }
+
+
 
 //        MyStatAdapter adapter2=new MyStatAdapter(dataArray2);
 //        RecyclerView recyclerView2=(RecyclerView)rootView.findViewById(R.id.stat_recycleView2);

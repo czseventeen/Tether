@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string name="app_name">Tether</string>
+        <string name="title_activity_home">主页</string>
+
+        <string name="navigation_title_home">主页</string>
+        <string name="navigation_title_mycar">爱车</string>
+        <string name="navigation_title_stat">数据</string>
+        <string name="navigation_actionbar_title"></string>
+        <string name="navigation_drawer_open">弹出导航栏</string>
+        <string name="navigation_drawer_close">关闭导航栏</string>
+
+        <string name="tab_title_home">主页</string>
+        <string name="tab_title_mycar">爱车</string>
+        <string name="tab_title_stat">数据</string>
+
+        <string name="action_example"></string>
+
+        <string name="action_settings">设置</string>
+        <string name="action_logout">注销</string>
+        <string name="title_activity_loading">LoadingActivity</string>
+
+        <string name="hello_world">Hello world!</string>
+
+
+        <!-- below are used for the Home class-->
+     <string name="YourCarIs">车况:</string>
+        <string name="Healthy">健康</string>
+        <string name="NeedEngineCheck">发动机需要检查</string>
+        <string name="NeedOilChange">需要更换机油</string>
+        <string name="TireFlat">轮胎气压过低</string>
+
+        <!-- Below are used for My Stat page-->
+        <string name="ProgressCircle_text">Score</string>
+
+
+
+        <!--Below are all used for JSON creation-->
+        <!-- Here is the Key inside Parse.com to get all the data in a JSONObject-->
+        <string name="JSON_KEY">AllStats</string>
+
+        <!-- My Home Page's Strings-->
+        <string name="Home_JSON_KEY">Home</string>
+        <string name="MoneySavedByDrivingElectric">节省汽油钱</string>
+        <string name="HealthSummary">车况</string>
+
+        <!-- My Car Page's Strings-->
+        <string name="MyCar_JSON_KEY">MyCar</string>
+        <string name="BatteryLeft">剩余电量</string>
+        <string name="BatteryV">电池电压</string>
+        <string name="BatteryI">电池电流</string>
+        <string name="BatteryR">电池电阻</string>
+        <string name="BatteryCapacity">电池容量</string>
+        <string name="FuelEconomy">百公里耗油</string>
+        <string name="BatteryTemp">电池温度</string>
+        <string name="Brand">品牌</string>
+        <string name="SeatingCapacity">标准座位数</string>
+        <string name="HorsePower">最大马力</string>
+        <string name="MaxRPM">最高转数</string>
+        <string name="TopSpeed">最高车速</string>
+        <string name="ZeroToSixtyTime">百公里加速</string>
+        <string name="EstimateValue">市值评估</string>
+
+
+
+        <!-- My Stats Page's Strings-->
+        <string name="MyStat_JSON_KEY">MyStat</string>
+
+        <string name="AverageTimeSpentInTrafficDaily">每日平均堵车耗时</string>
+        <string name="DrivingScore">驾驶评分</string>
+        <string name="AverageDailyDriveTime">每日平均行车时间</string>
+        <string name="AverageDailyMilesDriven">每日平均行车里数</string>
+
+
+
+
+        <string name="MilesDrivenThisCharge">此次充电行车里数</string>
+        <string name="TimeDrivenThisCharge">此次充电行车时间</string>
+        <string name="AverageMilesDrivenPerAH">每千瓦时平均行车公里数</string>
+        <string name="AverageDrivingTimePerAH">每千瓦时平均行车时间</string>
+        <string name="MaxMilesDrivenPerAH">每千瓦时最高行车公里数</string>
+
+
+
+        <string name="FastestSpeedDriven">最快行车速度</string>
+        <string name="NumOfSuddenBreak">急刹车数</string>
+        <string name="NumOfSuddenAccelerate">急加速数</string>
+        <string name="NumOfSuddenTurn">急转弯数</string>
+        <string name="NumOfAccident">事故次数</string>
+
+        <string name="AverageCostPerMile">每公里平均耗费</string>
+
+
+        <string name="TotalDrivingTime">总行车时间</string>
+        <string name="TotalMilesDriven">总里程</string>
+
+
+
+        <string name="AverageSpeedDriven">历史平均车速</string>
+        <string name="TotalTimeSpentInTraffic">堵车共耗时</string>
+
+
+
+        <string name="title_activity_main">MainActivity</string>
+        <string name="DrivingScoreLabel">驾驶评分</string>
+        <string name="YourBatteryLeft">剩余电池</string>
+        <string name="InsertMapHere">加入地图，并定位用户以及汽车</string>
+
+</resources>

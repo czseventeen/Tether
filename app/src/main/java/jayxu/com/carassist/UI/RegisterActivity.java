@@ -88,7 +88,7 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                 /*
                             The following code generates a random Home/MyCar/MyStats Object, convert it into a JSONArray and put into Parse.com associated with the user.
                 */
-                Home home = new Home(-1);
+                Home home = new Home(-1,RegisterActivity.this);
                 MyCar mycar=new MyCar(-1);
                 MyStats mystat=new MyStats(-1);
 
@@ -98,9 +98,9 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                 JSONObject allInOne=new JSONObject();
                 try {
 
-                    allInOne.put(getString(R.string.Home_Title), home.getJSON(RegisterActivity.this));
-                    allInOne.put(getString(R.string.MyCar_Title), mycar.getJSON(RegisterActivity.this));
-                    allInOne.put(getString(R.string.MyStat_Title), mystat.getJSON(RegisterActivity.this));
+                    allInOne.put(getString(R.string.Home_JSON_KEY), home.getJSON(RegisterActivity.this));
+                    allInOne.put(getString(R.string.MyCar_JSON_KEY), mycar.getJSON(RegisterActivity.this));
+                    allInOne.put(getString(R.string.MyStat_JSON_KEY), mystat.getJSON(RegisterActivity.this));
                 }catch (JSONException e){
                     e.printStackTrace();
                 }

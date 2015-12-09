@@ -27,8 +27,8 @@ public class Home {
 
 
     private static final int MoneySave_max=10000;
-    private static final String[] HealthStringArray = {"Is Healthy", "Need Engine Check", "Need Oil Change","Tire Need More Air"};
-
+    private static String[] HealthStringArray = {"Is Healthy", "Need Engine Check", "Need Oil Change","Tire Need More Air"};
+    private Context mContext=null;
     public Home(){
 
     }
@@ -36,22 +36,27 @@ public class Home {
     /*
     This constructor is used to assign random values to each variable.
      */
-    public Home(int i){
+    public Home(int i, Context context){
+        mContext=context;
         if(i==-1){
+
             Random r= new Random();
             this.setMoneySavedByDrivingElectric(r.nextInt(MoneySave_max));
             this.setCarGPS_X(r.nextDouble() * 90);
-            this.setCarGPS_Y(r.nextDouble()*180);
-            this.setUserGPS_X(r.nextDouble()*90);
-            this.setUserGPS_Y(r.nextDouble()*180);
+            this.setCarGPS_Y(r.nextDouble() * 180);
+            this.setUserGPS_X(r.nextDouble() * 90);
+            this.setUserGPS_Y(r.nextDouble() * 180);
+            HealthStringArray = new String[] {context.getString(R.string.Healthy), context.getString(R.string.NeedEngineCheck),
+                    context.getString(R.string.NeedOilChange),context.getString(R.string.TireFlat)};
             this.setHealthSummary(HealthStringArray[r.nextInt(HealthStringArray.length)]);
+
         }
 
     }
 
     public JSONObject getJSON(Context context) throws JSONException {
         JSONObject jsonobj=new JSONObject();
-        jsonobj.put(context.getString(R.string.MoneySavedByDrivingElectric),"$"+this.getMoneySavedByDrivingElectric());
+        jsonobj.put(context.getString(R.string.MoneySavedByDrivingElectric),this.getMoneySavedByDrivingElectric()); //+"$"
         jsonobj.put(context.getString(R.string.HealthSummary), this.getHealthSummary());
 
         return jsonobj;

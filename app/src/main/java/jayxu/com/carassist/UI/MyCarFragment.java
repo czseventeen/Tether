@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.parse.ParseUser;
 
 import org.json.JSONException;
@@ -46,9 +46,10 @@ public class MyCarFragment extends Fragment {
 
         ParseUser user=ParseUser.getCurrentUser();
         JSONObject mycar_results = null;
+        int batteryLeft=100;
         ArrayList<ItemData> itemData_list=new ArrayList<>();
         try {
-            mycar_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyCar_Title));
+            mycar_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyCar_JSON_KEY));
 
             if(mycar_results!=null){
                 Iterator<String> iterator=mycar_results.keys();
@@ -57,6 +58,10 @@ public class MyCarFragment extends Fragment {
                     String key=iterator.next();
                     temp_item.setDescription(key);
                     temp_item.setValue(mycar_results.getString(key));
+                    if(key.equals(getString(R.string.BatteryLeft))){
+                        batteryLeft=Math.round(Float.valueOf(temp_item.getValue()));
+                        continue;
+                    }
                     itemData_list.add(temp_item);
                 }
 
@@ -67,15 +72,18 @@ public class MyCarFragment extends Fragment {
             e.printStackTrace();
         }
 
-        View rootView = inflater.inflate(R.layout.fragment_all, container, false);
-        ImageView TopImage=(ImageView)rootView.findViewById(R.id.Top_imageView);
-        TopImage.setImageResource(R.drawable.teslar);
+        View rootView = inflater.inflate(R.layout.fragment_mycar, container, false);
+        //ImageView TopImage=(ImageView)rootView.findViewById(R.id.Top_imageView);
+        //TopImage.setImageResource(R.drawable.teslar);
 
         MyStatAdapter adapter=new MyStatAdapter(itemData_list);
-        RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.Stat_recycleView);
+        RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.mycar_recycleView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
+
+        NumberProgressBar batteryBar=(NumberProgressBar)rootView.findViewById(R.id.battery_bar);
+        batteryBar.setProgress(batteryLeft);
 
 /*   Stop using ListView
      ListView listview=(ListView)rootView.findViewById(R.id.mycar_list);

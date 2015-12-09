@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
@@ -55,8 +57,9 @@ public class HomeFragment extends Fragment {
             //retrieve all the data and parse to get data for home only.
             JSONObject home_results=null;
             ArrayList<ItemData> itemData_list=new ArrayList<>();
+            String CarHealth="";
             try {
-                home_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.Home_Title));
+                home_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.Home_JSON_KEY));
                 if(home_results!=null) {
                     Iterator<String> iterator = home_results.keys();
                     while (iterator.hasNext()) {
@@ -64,7 +67,12 @@ public class HomeFragment extends Fragment {
                         String key = iterator.next();
                         temp_item.setDescription(key);
                         temp_item.setValue(home_results.getString(key));
+                        if(key.equals(getString(R.string.HealthSummary))){
+                            CarHealth=temp_item.getValue();
+                            continue;
+                        }
                         itemData_list.add(temp_item);
+
                     }
                 }
             }catch (JSONException e){
@@ -77,15 +85,29 @@ public class HomeFragment extends Fragment {
             String[] array_result=results.split(",");*/
 
 
-            View rootView = inflater.inflate(R.layout.fragment_all, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
 
             MyStatAdapter adapter=new MyStatAdapter(itemData_list);
 
-            RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.Stat_recycleView);
+            RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.home_recycleView);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
             recyclerView.setHasFixedSize(true);
+            /*
+            Populating the Car health at Top
+             */
+            TextView homeText=(TextView)rootView.findViewById(R.id.home_textView);
+            homeText.setText(getString(R.string.YourCarIs)+" "+CarHealth);
+
+            /*
+            Changing Car health Background base on Health
+             */
+            FrameLayout health_background=(FrameLayout)rootView.findViewById(R.id.home_TopImage_Layout);
+            if (CarHealth.contains("Need")){
+                health_background.setBackground(getResources().getDrawable(R.drawable.warning_home_background));
+            }
+
             /*
             Stopped using ListView
              */

@@ -1,3 +1,36 @@
+12/08/2015 
+The following changes are Branched to "TabLayout"
+1. Now sending 1 JSONObject to Parse.com for all data exchange
+2. Now using TabLayout instead of NavigationDrawer
+3. Now using 1 layout and RecycleViewAdapter for all three fragments.
+4. Added ActionBar Theme.
+
+Todo:
+1. Change the TopImageView.
+2. More formatting
+
+
+12/06/2015 2nd Commit:
+1. Successfully populated the stats page using RecycleView.
+2. Split RecycleView into 2 cards.
+
+To Do:
+1.Find a better way to group the stats into cards
+2. find out how to use cards.
+3. add animation
+4. change the top actionbar into a picture and display core stat
+5. change from navigation drawer to tab
+
+12/06/2015:
+ Commit all small changes in order to move on to using RecycleView instead of ListView for all 3 fragments.
+
+12/04/2015:
+     1.Modified layout, added a branding color, changed Home/MyCar/MyStat to linearlayout
+     2. Now Home/MyCar/MyStat pages are also displaying color.
+    To Do:
+     1. Change all the lists data to cards.
+     2. Replace PlaceHolder images with Score/Car Health/Card Image
+
 12/3/2015:
 1. Added GSON jar, and used it to convert Home/MyCar/MyStat class objects to a string in JSON fashion.
 2. Populated ListView for MyStat page, The random generated stats are appearing in the list correctly.
