@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -121,7 +122,10 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
 
                             Toast toast = Toast.makeText(RegisterActivity.this, "Sign Up Success!", Toast.LENGTH_LONG);
                             toast.show();
-                            finish();
+                            Intent mIntent=new Intent(RegisterActivity.this, MainActivity.class);
+                            mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(mIntent);
 
                         } else {
                             Log.w(TAG, "--------------Sign Up Failed!");
