@@ -313,8 +313,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             } catch (InterruptedException e) {
                 return false;
             }
-
-
             return true;
         }
 
