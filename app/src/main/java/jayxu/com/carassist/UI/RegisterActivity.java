@@ -128,9 +128,13 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                             startActivity(mIntent);
 
                         } else {
+                            Toast toast=Toast.makeText(RegisterActivity.this, "Sign Up failed", Toast.LENGTH_LONG);
+                            if(e.getMessage().contains("already taken")){
+                                // The user name already exists
+                                toast.setText("Username already exist!");
+                            }
                             Log.w(TAG, "--------------Sign Up Failed!");
                             Log.w(TAG, e);
-                            Toast toast = Toast.makeText(RegisterActivity.this, "Sign Up failed", Toast.LENGTH_LONG);
                             toast.show();
                         }
                     }
