@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Car Assist</string>
+
+    <string name="app_name">Tether</string>
     <string name="title_activity_home">Home</string>
 
     <string name="navigation_title_home">Home</string>
@@ -8,6 +9,10 @@
     <string name="navigation_actionbar_title"></string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="tab_title_home">Home</string>
+    <string name="tab_title_mycar">My Car</string>
+    <string name="tab_title_stat">Statistics</string>
 
     <string name="action_example"></string>
 
@@ -23,6 +28,83 @@
     <string name="NeedEngineCheck">Need Engine Check</string>
     <string name="NeedOilChange">Need Oil Change</string>
     <string name="TireFlat">Tire Need More Air</string>
+
+    <!-- Below are used for My Stat page-->
+    <string name="ProgressCircle_text">Score</string>
+
+
+
+    <!--Below are all used for JSON creation-->
+    <!-- Here is the Key inside Parse.com to get all the data in a JSONObject-->
+    <string name="JSON_KEY">AllStats</string>
+
+    <!-- My Home Page's Strings-->
+    <string name="Home_JSON_KEY">Home</string>
+    <string name="MoneySavedByDrivingElectric">Money saved by driving electric</string>
+    <string name="HealthSummary">Health Summary</string>
+
+    <!-- My Car Page's Strings-->
+    <string name="MyCar_JSON_KEY">MyCar</string>
+    <string name="BatteryLeft">Battery left</string>
+    <string name="BatteryV">Battery Voltage</string>
+    <string name="BatteryI">Battery Current</string>
+    <string name="BatteryR">Battery Resistance</string>
+    <string name="BatteryTemp">Battery Temperature</string>
+    <string name="BatteryCapacity">Battery Capacity</string>
+    <string name="FuelEconomy">Equivalent Fuel Economy</string>
+    <string name="Brand">Brand</string>
+    <string name="SeatingCapacity">Seat Capacity</string>
+    <string name="HorsePower">Horse power</string>
+    <string name="MaxRPM">Max RPM</string>
+    <string name="TopSpeed">Top Speed</string>
+    <string name="ZeroToSixtyTime">0 to 60 time</string>
+    <string name="EstimateValue">Estimate Market Value</string>
+
+
+
+    <!-- My Stats Page's Strings-->
+    <string name="MyStat_JSON_KEY">MyStat</string>
+
+    <string name="AverageTimeSpentInTrafficDaily">Average time spent in traffic(Daily)</string>
+    <string name="DrivingScore">Driving Score</string>
+    <string name="AverageDailyDriveTime">Average time spent in car(Daily)</string>
+    <string name="AverageDailyMilesDriven">Average miles driven(Daily)</string>
+
+
+
+
+    <string name="MilesDrivenThisCharge">Miles driven this charge</string>
+    <string name="TimeDrivenThisCharge">Driving Time this charge</string>
+    <string name="AverageMilesDrivenPerAH">Average miles per Amp Hour</string>
+    <string name="AverageDrivingTimePerAH">Average driving time per Amp Hour</string>
+    <string name="MaxMilesDrivenPerAH">Maximum miles per Amp Hour</string>
+
+
+
+    <string name="FastestSpeedDriven">Fastest Speed Ever Driven</string>
+    <string name="NumOfSuddenBreak">Number of sudden breaks</string>
+    <string name="NumOfSuddenAccelerate">Number of sudden accelerations</string>
+    <string name="NumOfSuddenTurn">Number of sudden turns</string>
+    <string name="NumOfAccident">Number of accidents</string>
+
+    <string name="AverageCostPerMile">Average cost per mile</string>
+
+
+    <string name="TotalDrivingTime">Total driving time</string>
+    <string name="TotalMilesDriven">Total miles</string>
+
+
+
+    <string name="AverageSpeedDriven">Average Speed</string>
+    <string name="TotalTimeSpentInTraffic">Total time spent in traffic</string>
+
+
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="DrivingScoreLabel">Your driving score is:</string>
+    <string name="YourCarIs">Your car</string>
+    <string name="YourBatteryLeft">Battery left:</string>
+    <string name="InsertMapHere">Insert Map Here</string>
 
 
 </resources>

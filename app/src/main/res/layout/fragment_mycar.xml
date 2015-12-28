@@ -2,36 +2,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="jayxu.com.carassist.UI.HomeFragment"
     android:orientation="vertical"
-    tools:context="jayxu.com.carassist.UI.MyCarFragment"
-    android:background="@color/apptheme_color"
-    android:baselineAligned="false">
-    <ImageView
+    android:background="@color/WHITE">
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:id="@+id/mycar_imageView"
-        android:src="@drawable/teslax"
-        android:scaleType="fitCenter"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:adjustViewBounds="true"
-        />
+        android:layout_height="120dp"
+        android:background="@color/WHITE"
+        android:id="@+id/mycar_TopImage_Layout"
+        android:orientation="vertical"
+        >
 
-    <ListView
+        <com.daimajia.numberprogressbar.NumberProgressBar
+            android:id="@+id/battery_bar"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/YourBatteryLeft"
+            android:id="@+id/BatteryLeftText"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/apptheme_color" />
+    </FrameLayout>
+    <!--<ImageView-->
+
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="20"-->
+        <!--android:id="@+id/Top_imageView"-->
+        <!--android:src="@drawable/teslax"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--/>-->
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="80"
-        android:id="@+id/mycar_list"
-        android:layout_below="@id/home_imageView"
+        android:layout_weight="40"
+        android:id="@+id/mycar_recycleView"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|bottom"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:background="#ffffffff" />
+        android:background="@color/apptheme_color"
+        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp" />
 
-
-
-
-
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="40"-->
+        <!--android:id="@+id/home_recycleView2"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_gravity="center_horizontal|bottom"-->
+        <!--android:layout_marginLeft="50dp"-->
+        <!--android:layout_marginRight="50dp"-->
+        <!--android:background="#ffffffff" />-->
 
 </LinearLayout>

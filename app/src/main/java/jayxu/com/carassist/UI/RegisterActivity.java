@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -22,10 +23,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,32 +89,48 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                 /*
                             The following code generates a random Home/MyCar/MyStats Object, convert it into a JSONArray and put into Parse.com associated with the user.
                 */
-                Home home = new Home(-1);
+                Home home = new Home(-1,RegisterActivity.this);
                 MyCar mycar=new MyCar(-1);
                 MyStats mystat=new MyStats(-1);
 
-                Gson gson=new Gson();
-                String homeData=gson.toJson(home);
-                String mycarData=gson.toJson(mycar);
-                String mystatData=gson.toJson(mystat);
+                /*
+                * Parsing the Home/MyCar/MyStat objects into JSON objects and add them all to one JSONObject, then send to Parse.com
+                * */
+                JSONObject allInOne=new JSONObject();
+                try {
 
-                user.put("HOME_DATA",homeData);
-                user.put("MYCAR_DATA",mycarData);
-                user.put("MYSTAT_DATA",mystatData);
+                    allInOne.put(getString(R.string.Home_JSON_KEY), home.getJSON(RegisterActivity.this));
+                    allInOne.put(getString(R.string.MyCar_JSON_KEY), mycar.getJSON(RegisterActivity.this));
+                    allInOne.put(getString(R.string.MyStat_JSON_KEY), mystat.getJSON(RegisterActivity.this));
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                user.put(getString(R.string.JSON_KEY),allInOne);
+//                Gson gson=new Gson();
+//                String homeData=gson.toJson(home);
+//                String mycarData=gson.toJson(mycar);
+//                String mystatData=gson.toJson(mystat);
+//
+//                user.put("HOME_DATA",homeData);
+//                user.put("MYCAR_DATA",mycarData);
+//                user.put("MYSTAT_DATA",mystatData);
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
-                        if(e==null){
+                        if (e == null) {
                             Log.w(TAG, "--------------Sign Up Success!");
 
-                            Toast toast=Toast.makeText(RegisterActivity.this, "Sign Up Success!", Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText(RegisterActivity.this, "Sign Up Success!", Toast.LENGTH_LONG);
                             toast.show();
-                            finish();
+                            Intent mIntent=new Intent(RegisterActivity.this, MainActivity.class);
+                            mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(mIntent);
 
-                        }else{
-                            Log.w(TAG,"--------------Sign Up Failed!");
+                        } else {
+                            Log.w(TAG, "--------------Sign Up Failed!");
                             Log.w(TAG, e);
-                            Toast toast=Toast.makeText(RegisterActivity.this, "Sign Up failed", Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText(RegisterActivity.this, "Sign Up failed", Toast.LENGTH_LONG);
                             toast.show();
                         }
                     }

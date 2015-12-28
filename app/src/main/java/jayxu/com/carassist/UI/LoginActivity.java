@@ -61,7 +61,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         //  ActionBar actionbar=getActionBar();
         // actionbar.hide();
         if (ParseUser.getCurrentUser() != null) {
-            Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
+            //Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent mIntent = new Intent(LoginActivity.this, MainActivity.class);
             mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(mIntent);
@@ -84,7 +85,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     user.setPassword(password);
 
 
-                    user.logInInBackground(user.getUsername(), password, new LogInCallback() {
+                    ParseUser.logInInBackground(user.getUsername(), password, new LogInCallback() {
                         @Override
                         public void done(ParseUser user, ParseException e) {
                             if (e == null) {
@@ -92,7 +93,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
                                 Toast toast = Toast.makeText(LoginActivity.this, "Sign in Success!", Toast.LENGTH_LONG);
                                 toast.show();
-                                Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                                //Intent mIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                                Intent mIntent = new Intent(LoginActivity.this, MainActivity.class);
                                 mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
@@ -311,8 +313,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             } catch (InterruptedException e) {
                 return false;
             }
-
-
             return true;
         }
 

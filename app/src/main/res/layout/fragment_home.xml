@@ -4,29 +4,85 @@
     android:layout_height="match_parent"
     tools:context="jayxu.com.carassist.UI.HomeFragment"
     android:orientation="vertical"
-    android:background="@color/apptheme_color">
-    <ImageView
-
+    android:background="@color/WHITE">
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:id="@+id/home_imageView"
-        android:src="@drawable/teslas"
-        android:scaleType="fitCenter"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:adjustViewBounds="true"
-        />
+        android:layout_height="120dp"
+        android:id="@+id/home_TopImage_Layout"
+        android:background="@drawable/healthy_home_background"
+        >
 
-    <ListView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/YourCarIs"
+            android:id="@+id/home_textView"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
+    <!--<ImageView-->
+
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="20"-->
+        <!--android:id="@+id/Top_imageView"-->
+        <!--android:src="@drawable/teslax"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--/>-->
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/home_list"
-        android:layout_below="@id/home_imageView"
+        android:layout_height="20dp"
+        android:id="@+id/home_recycleView"
         android:layout_centerHorizontal="true"
-        android:layout_weight="80"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:background="#ffffffff" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/apptheme_color"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/qingdao_map"
+            android:adjustViewBounds="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/InsertMapHere"
+            android:id="@+id/PlaceHolder_insertMap"
+            android:layout_gravity="center"
+            android:textColor="#2525ff" />
+
+
+
+
+
+    </FrameLayout>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="40"-->
+        <!--android:id="@+id/home_recycleView2"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_gravity="center_horizontal|bottom"-->
+        <!--android:layout_marginLeft="50dp"-->
+        <!--android:layout_marginRight="50dp"-->
+        <!--android:background="#ffffffff" />-->
 
 </LinearLayout>

@@ -16,5 +16,6 @@
     <item name="GreenA400" type="color">#00C853</item>
 
     <color name="apptheme_color">#738b06</color>
-
+    <color name="WHITE">#FFFFFF</color>
+    <color name="Green_Gray">#FF888888</color>
 </resources>

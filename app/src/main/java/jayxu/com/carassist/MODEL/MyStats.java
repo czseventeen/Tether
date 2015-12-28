@@ -1,45 +1,56 @@
 package jayxu.com.carassist.MODEL;
 
+import android.content.Context;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
+
+import jayxu.com.carassist.R;
+
 
 /**
  * Created by Yuchen on 11/29/2015.
  * This Class Contains all the Stats are going to be displayed in the MyStats Page
  */
-public class MyStats {
-    private int DrivingScore;
-    private double MilesDrivenSinceLastCharge;
-    private double AverageMilesDrivenPerCharge;
-    private double MaxMilesDrivenPerCharge;
+public class MyStats  {
+
+    private double MilesDrivenThisCharge;
+    private double AverageMilesDrivenPerAH;
+    private double MaxMilesDrivenPerAH;
     private double FuelEconomy;
-    private double FastestSpeedDriven;
+
+    private int DrivingScore;
     private int NumOfSuddenBreak;
     private int NumOfSuddenAccelerate;
     private int NumOfSuddenTurn;
     private int NumOfAccident;
+    private double FastestSpeedDriven;
+
     private double AverageSpeedDriven;
     private double AverageDailyDriveTime;
-    private double AverageDrivingTimePerCharge;
+    private double AverageDrivingTimePerAH;
     private double AverageDailyMilesDriven;
     private double AverageCostPerMile;
+    private double AverageTimeSpentInTrafficDaily;
     private double TotalDrivingTime;
-    private double TotalDrivingTimeThisCharge;
+    private double TimeDrivenThisCharge;
     private double TotalTimeSpentInTraffic;
     private double TotalMilesDriven;
-    private double TotalMilesDrivenThisCharge;
 
-public MyStats(){
+    public MyStats(){
         DrivingScore = 0;
 
-        AverageMilesDrivenPerCharge = 0;
+        AverageMilesDrivenPerAH = 0;
         AverageSpeedDriven = 0;
         AverageDailyDriveTime = 0;
-        AverageDrivingTimePerCharge = 0;
+        AverageDrivingTimePerAH = 0;
         AverageDailyMilesDriven = 0;
         AverageCostPerMile = 0;
 
-        MilesDrivenSinceLastCharge = 0;
-        MaxMilesDrivenPerCharge = 0;
+        MilesDrivenThisCharge = 0;
+        MaxMilesDrivenPerAH = 0;
         FuelEconomy = 0;
         FastestSpeedDriven = 0;
 
@@ -49,18 +60,17 @@ public MyStats(){
         NumOfAccident = 0;
 
         TotalDrivingTime = 0;
-        TotalDrivingTimeThisCharge = 0;
+        TimeDrivenThisCharge = 0;
         TotalTimeSpentInTraffic = 0;
         TotalMilesDriven = 0;
-        TotalMilesDrivenThisCharge = 0;
     }
 
     public MyStats(int i){
         Random r= new Random();
         DrivingScore = r.nextInt(100);
-        MilesDrivenSinceLastCharge = r.nextInt(500);
-        AverageMilesDrivenPerCharge =r.nextInt(500);
-        MaxMilesDrivenPerCharge = r.nextInt(500);
+        MilesDrivenThisCharge = r.nextInt(500);
+        AverageMilesDrivenPerAH =r.nextInt(500);
+        MaxMilesDrivenPerAH = r.nextInt(500);
         FuelEconomy = r.nextInt(500);
         FastestSpeedDriven = r.nextInt(200);
         NumOfSuddenBreak = r.nextInt(100);
@@ -69,15 +79,52 @@ public MyStats(){
         NumOfAccident = r.nextInt(20);
         AverageSpeedDriven = r.nextInt(100);
         AverageDailyDriveTime = r.nextInt(180);
-        AverageDrivingTimePerCharge = r.nextInt(100);
+        AverageDrivingTimePerAH = r.nextInt(100);
         AverageDailyMilesDriven = r.nextInt(500);
         AverageCostPerMile = r.nextInt(10);
+        AverageTimeSpentInTrafficDaily=r.nextInt(200);
         TotalDrivingTime = r.nextInt(500000);
-        TotalDrivingTimeThisCharge = r.nextInt(500);
-        TotalTimeSpentInTraffic = r.nextInt(200);
+        TimeDrivenThisCharge = r.nextInt(500);
+        TotalTimeSpentInTraffic = r.nextInt(10000);
         TotalMilesDriven = r.nextInt(200000);
-        TotalMilesDrivenThisCharge = r.nextInt(500);
+    }
 
+
+    public JSONObject getJSON(Context context) throws JSONException{
+        JSONObject jsonobj=new JSONObject();
+        jsonobj.put(context.getString(R.string.AverageTimeSpentInTrafficDaily),this.getAverageTimeSpentInTrafficDaily());//+" min"
+        jsonobj.put(context.getString(R.string.FuelEconomy),this.getFuelEconomy()); //+" MPG"
+        jsonobj.put(context.getString(R.string.DrivingScore),this.getDrivingScore());
+        jsonobj.put(context.getString(R.string.AverageDailyDriveTime),this.getAverageDailyDriveTime());
+        jsonobj.put(context.getString(R.string.AverageDailyMilesDriven), this.getAverageDailyMilesDriven());
+        jsonobj.put(context.getString(R.string.MilesDrivenThisCharge), this.getMilesDrivenThisCharge());
+        jsonobj.put(context.getString(R.string.TimeDrivenThisCharge), this.getTimeDrivenThisCharge());
+        jsonobj.put(context.getString(R.string.AverageMilesDrivenPerAH), this.getAverageDrivingTimePerAH());
+        jsonobj.put(context.getString(R.string.AverageDrivingTimePerAH), this.getAverageDrivingTimePerAH());
+        jsonobj.put(context.getString(R.string.MaxMilesDrivenPerAH), this.getMaxMilesDrivenPerAH());
+        jsonobj.put(context.getString(R.string.FastestSpeedDriven), this.getFastestSpeedDriven());
+        jsonobj.put(context.getString(R.string.NumOfSuddenBreak), this.getNumOfSuddenBreak());
+        jsonobj.put(context.getString(R.string.NumOfSuddenAccelerate), this.getNumOfSuddenAccelerate());
+        jsonobj.put(context.getString(R.string.NumOfSuddenTurn), this.getNumOfSuddenTurn());
+        jsonobj.put(context.getString(R.string.NumOfAccident), this.getNumOfAccident());
+        jsonobj.put(context.getString(R.string.AverageCostPerMile), this.getAverageCostPerMile());
+        jsonobj.put(context.getString(R.string.TotalDrivingTime), this.getTotalDrivingTime());
+        jsonobj.put(context.getString(R.string.TotalMilesDriven), this.getTotalMilesDriven());
+        jsonobj.put(context.getString(R.string.AverageSpeedDriven), this.getAverageSpeedDriven());
+        jsonobj.put(context.getString(R.string.TotalTimeSpentInTraffic), this.getTotalTimeSpentInTraffic());
+
+
+
+        return jsonobj;
+    }
+
+
+    public double getAverageTimeSpentInTrafficDaily() {
+        return AverageTimeSpentInTrafficDaily;
+    }
+
+    public void setAverageTimeSpentInTrafficDaily(double averageTimeSpentInTrafficDaily) {
+        AverageTimeSpentInTrafficDaily = averageTimeSpentInTrafficDaily;
     }
 
     public int getDrivingScore() {
@@ -88,28 +135,28 @@ public MyStats(){
         DrivingScore = drivingScore;
     }
 
-    public double getMilesDrivenSinceLastCharge() {
-        return MilesDrivenSinceLastCharge;
+    public double getMilesDrivenThisCharge() {
+        return MilesDrivenThisCharge;
     }
 
-    public void setMilesDrivenSinceLastCharge(double milesDrivenSinceLastCharge) {
-        MilesDrivenSinceLastCharge = milesDrivenSinceLastCharge;
+    public void setMilesDrivenThisCharge(double milesDrivenThisCharge) {
+        MilesDrivenThisCharge = milesDrivenThisCharge;
     }
 
-    public double getAverageMilesDrivenPerCharge() {
-        return AverageMilesDrivenPerCharge;
+    public double getAverageMilesDrivenPerAH() {
+        return AverageMilesDrivenPerAH;
     }
 
-    public void setAverageMilesDrivenPerCharge(double averageMilesDrivenPerCharge) {
-        AverageMilesDrivenPerCharge = averageMilesDrivenPerCharge;
+    public void setAverageMilesDrivenPerAH(double averageMilesDrivenPerAH) {
+        AverageMilesDrivenPerAH = averageMilesDrivenPerAH;
     }
 
-    public double getMaxMilesDrivenPerCharge() {
-        return MaxMilesDrivenPerCharge;
+    public double getMaxMilesDrivenPerAH() {
+        return MaxMilesDrivenPerAH;
     }
 
-    public void setMaxMilesDrivenPerCharge(double maxMilesDrivenPerCharge) {
-        MaxMilesDrivenPerCharge = maxMilesDrivenPerCharge;
+    public void setMaxMilesDrivenPerAH(double maxMilesDrivenPerAH) {
+        MaxMilesDrivenPerAH = maxMilesDrivenPerAH;
     }
 
     public double getFuelEconomy() {
@@ -176,12 +223,12 @@ public MyStats(){
         AverageDailyDriveTime = averageDailyDriveTime;
     }
 
-    public double getAverageDrivingTimePerCharge() {
-        return AverageDrivingTimePerCharge;
+    public double getAverageDrivingTimePerAH() {
+        return AverageDrivingTimePerAH;
     }
 
-    public void setAverageDrivingTimePerCharge(double averageDrivingTimePerCharge) {
-        AverageDrivingTimePerCharge = averageDrivingTimePerCharge;
+    public void setAverageDrivingTimePerAH(double averageDrivingTimePerAH) {
+        AverageDrivingTimePerAH = averageDrivingTimePerAH;
     }
 
     public double getAverageDailyMilesDriven() {
@@ -208,12 +255,12 @@ public MyStats(){
         TotalDrivingTime = totalDrivingTime;
     }
 
-    public double getTotalDrivingTimeThisCharge() {
-        return TotalDrivingTimeThisCharge;
+    public double getTimeDrivenThisCharge() {
+        return TimeDrivenThisCharge;
     }
 
-    public void setTotalDrivingTimeThisCharge(double totalDrivingTimeThisCharge) {
-        TotalDrivingTimeThisCharge = totalDrivingTimeThisCharge;
+    public void setTimeDrivenThisCharge(double timeDrivenThisCharge) {
+        TimeDrivenThisCharge = timeDrivenThisCharge;
     }
 
     public double getTotalTimeSpentInTraffic() {
@@ -232,16 +279,5 @@ public MyStats(){
         TotalMilesDriven = totalMilesDriven;
     }
 
-    public double getTotalMilesDrivenThisCharge() {
-        return TotalMilesDrivenThisCharge;
-    }
 
-    public void setTotalMilesDrivenThisCharge(double totalMilesDrivenThisCharge) {
-        TotalMilesDrivenThisCharge = totalMilesDrivenThisCharge;
-    }
-
-    @Override
-    public String toString() {
-        return "Daily Average,";
-    }
 }

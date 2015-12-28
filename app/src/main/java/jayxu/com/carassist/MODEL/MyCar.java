@@ -1,6 +1,13 @@
 package jayxu.com.carassist.MODEL;
 
+import android.content.Context;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
+
+import jayxu.com.carassist.R;
 
 /**
  * Created by Yuchen on 11/29/2015.
@@ -25,14 +32,14 @@ public class MyCar {
 
     /*
     Below are the JSON index ids.
-     */
+
     private static final int jBatteryLeft=0;
     private static final int jBatteryV=1;
     private static final int jBatteryI=2;
     private static final int jBatteryR=3;
     private static final int jBatteryTemp=4;
     private static final int jBatteryCapacity=5;
-
+    */
     public MyCar(){
         BatteryLeft = 0;
         BatteryV = 0;
@@ -73,7 +80,24 @@ public class MyCar {
 
     }
 
+    public JSONObject getJSON(Context context) throws JSONException {
+        JSONObject jsonobj=new JSONObject();
+        jsonobj.put(context.getString(R.string.BatteryLeft), this.getBatteryLeft()); //+"%"
+        jsonobj.put(context.getString(R.string.BatteryTemp), this.getBatteryTemp()); //+"C"
+        jsonobj.put(context.getString(R.string.BatteryCapacity), this.getBatteryCapacity());
+        jsonobj.put(context.getString(R.string.FuelEconomy), this.getFuelEconomy());
+        jsonobj.put(context.getString(R.string.Brand), this.getBrand());
+        jsonobj.put(context.getString(R.string.SeatingCapacity), this.getSeatingCapacity());
+        jsonobj.put(context.getString(R.string.HorsePower), this.getHorsePower());
+        jsonobj.put(context.getString(R.string.MaxRPM), this.getMaxRPM());
+        jsonobj.put(context.getString(R.string.TopSpeed), this.getTopSpeed());
+        jsonobj.put(context.getString(R.string.ZeroToSixtyTime), this.getZeroToSixtyTime());
+        jsonobj.put(context.getString(R.string.EstimateValue), this.getEstimateValue());
+        jsonobj.put(context.getString(R.string.TotalMilesDriven), this.getTotalMilesDriven());
 
+
+        return jsonobj;
+    }
 
     public double getBatteryLeft() {
         return BatteryLeft;
