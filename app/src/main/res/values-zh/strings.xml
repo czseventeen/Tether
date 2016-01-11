@@ -24,6 +24,7 @@
         <string name="hello_world">Hello world!</string>
 
 
+
         <!-- below are used for the Home class-->
      <string name="YourCarIs">车况:</string>
         <string name="Healthy">健康</string>
@@ -40,10 +41,19 @@
         <!-- Here is the Key inside Parse.com to get all the data in a JSONObject-->
         <string name="JSON_KEY">AllStats</string>
 
+
+    <!--Login Page string-->
+    <string name="InvaUserPass">用户名/密码 错误</string>
+    <string name="NotRegistered">用户尚未注册</string>
+
         <!-- My Home Page's Strings-->
         <string name="Home_JSON_KEY">Home</string>
         <string name="MoneySavedByDrivingElectric">节省汽油钱</string>
         <string name="HealthSummary">车况</string>
+    <string name="UserGPS_X">用户坐标X</string>
+    <string name="UserGPS_Y">用户坐标Y</string>
+    <string name="CarGPS_X">汽车坐标X</string>
+    <string name="CarGPS_Y">汽车坐标Y</string>
 
         <!-- My Car Page's Strings-->
         <string name="MyCar_JSON_KEY">MyCar</string>
@@ -106,5 +116,7 @@
         <string name="DrivingScoreLabel">驾驶评分</string>
         <string name="YourBatteryLeft">剩余电池</string>
         <string name="InsertMapHere">加入地图，并定位用户以及汽车</string>
-
+    <!--Map Activity page strings-->
+    <string name="UserLocation">您的位置</string>
+    <string name="CarLocation">爱车</string>
 </resources>

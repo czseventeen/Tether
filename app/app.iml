@@ -96,9 +96,10 @@
     <orderEntry type="library" exported="" name="cardview-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="design-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
+    <orderEntry type="library" exported="" name="TencentMapSDK_Raster_v1.1.2.16281" level="project" />
     <orderEntry type="library" exported="" name="mid-sdk-2.20" level="project" />
+    <orderEntry type="library" exported="" name="parse-android-1.12.0" level="project" />
     <orderEntry type="library" exported="" name="circleprogress-1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="parse-android-1.11.0" level="project" />
     <orderEntry type="library" exported="" name="wup-1.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />

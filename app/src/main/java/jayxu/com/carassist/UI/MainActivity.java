@@ -52,9 +52,11 @@ public class MainActivity extends AppCompatActivity{
 
         tabLayout.setupWithViewPager(mViewPager);
         ActionBar ab=getSupportActionBar();
+
         ab.setElevation(0);
         ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.apptheme_color)));
         ab.setTitle("");
+
 
 
 
@@ -113,16 +115,22 @@ public class MainActivity extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-            ParseUser.logOut();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            return true;
-        }
+        Intent intent;
+        switch (id) {
+            case R.id.action_logout:
+                    ParseUser.logOut();
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    return true;
+            case R.id.action_map:
+                    intent = new Intent(MainActivity.this, MapActivity.class);
+                    startActivity(intent);
+                    return true;
 
+        }
         return super.onOptionsItemSelected(item);
     }
 

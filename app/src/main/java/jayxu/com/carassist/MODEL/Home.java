@@ -42,10 +42,11 @@ public class Home {
 
             Random r= new Random();
             this.setMoneySavedByDrivingElectric(r.nextInt(MoneySave_max));
-            this.setCarGPS_X(r.nextDouble() * 90);
-            this.setCarGPS_Y(r.nextDouble() * 180);
+
             this.setUserGPS_X(r.nextDouble() * 90);
             this.setUserGPS_Y(r.nextDouble() * 180);
+            this.setCarGPS_X(this.getUserGPS_X()+r.nextDouble()*10);
+            this.setCarGPS_Y(this.getUserGPS_Y()+r.nextDouble()*10);
             HealthStringArray = new String[] {context.getString(R.string.Healthy), context.getString(R.string.NeedEngineCheck),
                     context.getString(R.string.NeedOilChange),context.getString(R.string.TireFlat)};
             this.setHealthSummary(HealthStringArray[r.nextInt(HealthStringArray.length)]);
@@ -58,6 +59,11 @@ public class Home {
         JSONObject jsonobj=new JSONObject();
         jsonobj.put(context.getString(R.string.MoneySavedByDrivingElectric),this.getMoneySavedByDrivingElectric()); //+"$"
         jsonobj.put(context.getString(R.string.HealthSummary), this.getHealthSummary());
+        jsonobj.put(context.getString(R.string.UserGPS_X), this.getUserGPS_X());
+        jsonobj.put(context.getString(R.string.UserGPS_Y), this.getUserGPS_Y());
+        jsonobj.put(context.getString(R.string.CarGPS_X), this.getCarGPS_X());
+        jsonobj.put(context.getString(R.string.CarGPS_Y), this.getCarGPS_Y());
+
 
         return jsonobj;
     }

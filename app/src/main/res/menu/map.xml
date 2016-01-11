@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context="jayxu.com.carassist.UI.HomeActivity"
     >
     <!--<item android:id="@+id/action_example" android:title="Home"-->
-        <!--android:icon="@drawable/ic_search_white_48dp"-->
-        <!--app:showAsAction="withText|ifRoom"-->
-        <!--/>-->
+    <!--android:icon="@drawable/ic_search_white_48dp"-->
+    <!--app:showAsAction="withText|ifRoom"-->
+    <!--/>-->
     <item android:id="@+id/action_logout" android:title="@string/action_logout"
         android:orderInCategory="100" app:showAsAction="never"
         />
-    <item android:id="@+id/action_map" android:title="@string/action_map"
-        app:showAsAction="always" android:icon="@drawable/ic_map"/>
 </menu>

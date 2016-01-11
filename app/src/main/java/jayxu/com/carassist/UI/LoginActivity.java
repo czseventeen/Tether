@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -101,14 +102,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                                 startActivity(mIntent);
 
                             } else {
-                                Toast toast = Toast.makeText(LoginActivity.this, "Sign in Failed!", Toast.LENGTH_LONG);
+                                Toast toast=Toast.makeText(LoginActivity.this, "Sign Up Failed!", Toast.LENGTH_LONG);
+                                if(e.getMessage().contains("invalid login parameters")){
+                                    toast = Toast.makeText(LoginActivity.this, getString(R.string.InvaUserPass), Toast.LENGTH_LONG);
+                                }
                                 toast.show();
                                 //Log.w(">>>>>>>>>>>", e);
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Sign in Failed!")
-                                        .setTitle("Error")
-                                        .setPositiveButton("OK", null);
-                                builder.show();
+
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+//                                builder.setMessage("Sign in Failed!")
+//                                        .setTitle("Error")
+//                                        .setPositiveButton("OK", null);
+//                                builder.show();
                             }
                         }
                     });

@@ -15,12 +15,16 @@
     <string name="tab_title_stat">Statistics</string>
 
     <string name="action_example"></string>
+    <string name="action_map">Map</string>
+
 
     <string name="action_settings">Settings</string>
     <string name="action_logout">Log Out</string>
     <string name="title_activity_loading">LoadingActivity</string>
 
     <string name="hello_world">Hello world!</string>
+
+
 
 
     <!-- below are used for the Home class-->
@@ -38,10 +42,21 @@
     <!-- Here is the Key inside Parse.com to get all the data in a JSONObject-->
     <string name="JSON_KEY">AllStats</string>
 
+
+    <!--Login Page string-->
+    <string name="InvaUserPass">Invalid Username/Password</string>
+    <string name="NotRegistered">User Not Registered</string>
+
+
+
     <!-- My Home Page's Strings-->
     <string name="Home_JSON_KEY">Home</string>
     <string name="MoneySavedByDrivingElectric">Money saved by driving electric</string>
     <string name="HealthSummary">Health Summary</string>
+    <string name="UserGPS_X">User X coordinate</string>
+    <string name="UserGPS_Y">User Y coordinate</string>
+    <string name="CarGPS_X">Car X coordinate</string>
+    <string name="CarGPS_Y">Car Y coordinate</string>
 
     <!-- My Car Page's Strings-->
     <string name="MyCar_JSON_KEY">MyCar</string>
@@ -105,6 +120,8 @@
     <string name="YourCarIs">Your car</string>
     <string name="YourBatteryLeft">Battery left:</string>
     <string name="InsertMapHere">Insert Map Here</string>
-
-
+    <string name="title_activity_map">MapActivity</string>
+<!--Map Activity page strings-->
+    <string name="UserLocation">Your Location</string>
+    <string name="CarLocation">Car\'s Location</string>
 </resources>

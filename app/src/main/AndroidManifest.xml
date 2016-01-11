@@ -8,8 +8,11 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <permission android:name="com.maret.maps.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
-    <!--Below are for the Push notifications-->
+
+    <permission
+        android:name="com.maret.maps.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+    <!-- Below are for the Push notifications -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -24,15 +27,15 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-
-
-
     <application
         android:name=".UI.ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="TencentMapSDK"
+            android:value="KSOBZ-BLKWJ-6MMFP-FPX7L-22IN3-QBBVA"/>
         <activity
             android:name=".UI.LoginActivity"
             android:label="@string/app_name"
@@ -63,33 +66,34 @@
         <!-- </activity> -->
         <activity
             android:name=".UI.MainActivity"
-            android:theme="@style/Theme.Ab_"
-            android:label="@string/title_activity_main" >
-
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Ab_" >
         </activity>
 
-        <!--<service android:name="com.parse.PushService" />-->
-        <!--<receiver android:name="com.parse.ParsePushBroadcastReceiver"-->
-            <!--android:exported="false">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.parse.push.intent.RECEIVE" />-->
-                <!--<action android:name="com.parse.push.intent.DELETE" />-->
-                <!--<action android:name="com.parse.push.intent.OPEN" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-        <!--<receiver android:name="com.parse.GcmBroadcastReceiver"-->
-            <!--android:permission="com.google.android.c2dm.permission.SEND">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
-                <!--<action android:name="com.google.android.c2dm.intent.REGISTRATION" />-->
+        <!-- <service android:name="com.parse.PushService" /> -->
+        <!-- <receiver android:name="com.parse.ParsePushBroadcastReceiver" -->
+        <!-- android:exported="false"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.parse.push.intent.RECEIVE" /> -->
+        <!-- <action android:name="com.parse.push.intent.DELETE" /> -->
+        <!-- <action android:name="com.parse.push.intent.OPEN" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <!-- <receiver android:name="com.parse.GcmBroadcastReceiver" -->
+        <!-- android:permission="com.google.android.c2dm.permission.SEND"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.android.c2dm.intent.RECEIVE" /> -->
+        <!-- <action android:name="com.google.android.c2dm.intent.REGISTRATION" /> -->
 
-                <!--<category android:name="jayxu.com.carassist" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
+
+        <!-- <category android:name="jayxu.com.carassist" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
         <receiver
             android:name="com.tencent.android.tpush.XGPushReceiver"
             android:process=":xg_service_v2" >
             <intent-filter android:priority="0x7fffffff" >
+
                 <!-- 【必须】 信鸽SDK的内部广播 -->
                 <action android:name="com.tencent.android.tpush.action.SDK" />
                 <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />
@@ -105,12 +109,13 @@
         </receiver>
 
         <!-- 【必须】 (2.30及以上版新增)展示通知的activity -->
-        <!-- 【注意】 如果被打开的activity是启动模式为SingleTop，SingleTask或SingleInstance，请根据通知的异常自查列表第8点处理-->
+        <!-- 【注意】 如果被打开的activity是启动模式为SingleTop，SingleTask或SingleInstance，请根据通知的异常自查列表第8点处理 -->
         <activity
             android:name="com.tencent.android.tpush.XGPushActivity"
             android:exported="true" >
             <intent-filter>
-                <!-- 若使用AndroidStudio，请设置android:name="android.intent.action"-->
+
+                <!-- 若使用AndroidStudio，请设置android:name="android.intent.action" -->
                 <action android:name="android.intent.action" />
             </intent-filter>
         </activity>
@@ -140,7 +145,14 @@
             android:name="XG_V2_ACCESS_KEY"
             android:value="A987EFQT5C2I" />
 
-
+        <activity
+            android:name=".UI.MapActivity"
+            android:label="@string/title_activity_map"
+            android:parentActivityName=".UI.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="jayxu.com.carassist.UI.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
