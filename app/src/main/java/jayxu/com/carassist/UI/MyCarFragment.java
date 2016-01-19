@@ -48,29 +48,29 @@ public class MyCarFragment extends Fragment {
         JSONObject mycar_results = null;
         int batteryLeft=100;
         ArrayList<ItemData> itemData_list=new ArrayList<>();
-        try {
-            mycar_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyCar_JSON_KEY));
-
-            if(mycar_results!=null){
-                Iterator<String> iterator=mycar_results.keys();
-                while(iterator.hasNext()){
-                    ItemData temp_item=new ItemData();
-                    String key=iterator.next();
-                    temp_item.setDescription(key);
-                    temp_item.setValue(mycar_results.getString(key));
-                    if(key.equals(getString(R.string.BatteryLeft))){
-                        batteryLeft=Math.round(Float.valueOf(temp_item.getValue()));
-                        continue;
-                    }
-                    itemData_list.add(temp_item);
-                }
-
-            }
-        }catch (JSONException e){
-            e.printStackTrace();
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
+//        try {
+//            mycar_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyCar_JSON_KEY));
+//
+//            if(mycar_results!=null){
+//                Iterator<String> iterator=mycar_results.keys();
+//                while(iterator.hasNext()){
+//                    ItemData temp_item=new ItemData();
+//                    String key=iterator.next();
+//                    temp_item.setDescription(key);
+//                    temp_item.setValue(mycar_results.getString(key));
+//                    if(key.equals(getString(R.string.BatteryLeft))){
+//                        batteryLeft=Math.round(Float.valueOf(temp_item.getValue()));
+//                        continue;
+//                    }
+//                    itemData_list.add(temp_item);
+//                }
+//
+//            }
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }catch (NullPointerException e){
+//            e.printStackTrace();
+//        }
 
         View rootView = inflater.inflate(R.layout.fragment_mycar, container, false);
         //ImageView TopImage=(ImageView)rootView.findViewById(R.id.Top_imageView);

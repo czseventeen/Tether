@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:gravity="center_horizontal"
     android:orientation="vertical"  tools:context="LoginActivity"
-    android:background="@color/apptheme_color">
+    android:background="@color/Black"
+    android:theme="@style/AppTheme"
+    >
 
     <!-- Login progress -->
     <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
@@ -17,11 +19,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:textColor="#FFFFFFFF"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        style="@style/EditText" />
 
     <LinearLayout android:id="@+id/email_login_form" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:orientation="vertical"
-        android:background="#ffffffff"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
@@ -42,13 +44,14 @@
             android:imeOptions="actionUnspecified" android:inputType="textPassword"
             android:maxLines="1" android:singleLine="true" />
 
-        <Button android:id="@+id/login_button" style="@style/ButtonAppTheme"
+        <Button android:id="@+id/login_button"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="@string/action_sign_in_short"
             android:textStyle="bold"
-            android:textColor="#FFFFFFFF"
-            android:background="@color/apptheme_color"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:clickable="false"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp" />
 
         <TextView
             style="?android:textAppearanceSmall"

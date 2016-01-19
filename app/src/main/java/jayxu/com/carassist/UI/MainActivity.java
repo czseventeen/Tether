@@ -44,18 +44,19 @@ public class MainActivity extends AppCompatActivity{
         mViewPager.setAdapter(new TabPagerAdapter(getSupportFragmentManager(), MainActivity.this));
 
         TabLayout tabLayout=(TabLayout)findViewById(R.id.sliding_tabs);
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.WHITE));
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setBackgroundColor(getResources().getColor(R.color.apptheme_color));
-        tabLayout.setTabTextColors(getResources().getColor(R.color.WHITE), getResources().getColor(R.color.WHITE));
+//        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.WHITE));
+//        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+//        tabLayout.setBackgroundColor(getResources().getColor(R.color.apptheme_color));
+//        tabLayout.setTabTextColors(getResources().getColor(R.color.WHITE), getResources().getColor(R.color.WHITE));
 
         tabLayout.setupWithViewPager(mViewPager);
         ActionBar ab=getSupportActionBar();
 
-        ab.setElevation(0);
-        ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.apptheme_color)));
-        ab.setTitle("");
+//        ab.setElevation(0);
+//        ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.apptheme_color)));
+//        ab.setTitle("");
+        ab.hide();
 
 
 

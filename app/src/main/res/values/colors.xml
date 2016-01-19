@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="Green50" type="color">#E8F5E9</item>
-    <item name="Green100" type="color">#C8E6C9</item>
-    <item name="Green200" type="color">#A5D6A7</item>
-    <item name="Green300" type="color">#81C784</item>
-    <item name="Green400" type="color">#66BB6A</item>
-    <item name="Green500" type="color">#4CAF50</item>
-    <item name="Green600" type="color">#43A047</item>
-    <item name="Green700" type="color">#388E3C</item>
-    <item name="Green800" type="color">#2E7D32</item>
-    <item name="Green900" type="color">#1B5E20</item>
-    <item name="GreenA100" type="color">#B9F6CA</item>
-    <item name="GreenA200" type="color">#69F0AE</item>
-    <item name="GreenA300" type="color">#00E676</item>
-    <item name="GreenA400" type="color">#00C853</item>
+    <!--<item name="Green50" type="color">#E8F5E9</item>-->
+    <!--<item name="Green100" type="color">#C8E6C9</item>-->
+    <!--<item name="Green200" type="color">#A5D6A7</item>-->
+    <!--<item name="Green300" type="color">#81C784</item>-->
+    <!--<item name="Green400" type="color">#66BB6A</item>-->
+    <!--<item name="Green500" type="color">#4CAF50</item>-->
+    <!--<item name="Green600" type="color">#43A047</item>-->
+    <!--<item name="Green700" type="color">#388E3C</item>-->
+    <!--<item name="Green800" type="color">#2E7D32</item>-->
+    <!--<item name="Green900" type="color">#1B5E20</item>-->
+    <!--<item name="GreenA100" type="color">#B9F6CA</item>-->
+    <!--<item name="GreenA200" type="color">#69F0AE</item>-->
+    <!--<item name="GreenA300" type="color">#00E676</item>-->
+    <!--<item name="GreenA400" type="color">#00C853</item>-->
 
-    <color name="apptheme_color">#738b06</color>
     <color name="WHITE">#FFFFFF</color>
     <color name="Green_Gray">#FF888888</color>
+    <color name="Black">#000000</color>
 </resources>

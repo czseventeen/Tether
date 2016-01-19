@@ -48,32 +48,32 @@ public class StatFragment extends Fragment {
         JSONObject mystat_results = null;
         ArrayList<ItemData> itemData_list=new ArrayList<>();
         float drivingScore=0;
-        try {
-             mystat_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyStat_JSON_KEY));
-
-        if(mystat_results!=null){
-            Iterator<String> iterator=mystat_results.keys();
-            while(iterator.hasNext()){
-                ItemData temp_item=new ItemData();
-
-                String key=iterator.next();
-
-                temp_item.setDescription(key);
-                temp_item.setValue(mystat_results.getString(key));
-                if(key.equals(getString(R.string.DrivingScore))){
-                    drivingScore=Float.valueOf(temp_item.getValue());
-                    continue;
-                }
-                itemData_list.add(temp_item);
-
-            }
-
-        }
-        }catch (JSONException e){
-            e.printStackTrace();
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
+//        try {
+//             mystat_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyStat_JSON_KEY));
+//
+//        if(mystat_results!=null){
+//            Iterator<String> iterator=mystat_results.keys();
+//            while(iterator.hasNext()){
+//                ItemData temp_item=new ItemData();
+//
+//                String key=iterator.next();
+//
+//                temp_item.setDescription(key);
+//                temp_item.setValue(mystat_results.getString(key));
+//                if(key.equals(getString(R.string.DrivingScore))){
+//                    drivingScore=Float.valueOf(temp_item.getValue());
+//                    continue;
+//                }
+//                itemData_list.add(temp_item);
+//
+//            }
+//
+//        }
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }catch (NullPointerException e){
+//            e.printStackTrace();
+//        }
 
 
 

@@ -39,7 +39,7 @@
         <activity
             android:name=".UI.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/LoginTheme"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +51,7 @@
             android:name=".UI.RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".UI.LoginActivity"
-            android:theme="@style/LoginTheme"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -67,7 +67,7 @@
         <activity
             android:name=".UI.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Ab_" >
+            android:theme="@style/Theme.Future" >
         </activity>
 
         <!-- <service android:name="com.parse.PushService" /> -->
