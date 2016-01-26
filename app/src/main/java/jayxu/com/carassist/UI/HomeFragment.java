@@ -91,17 +91,17 @@ public class HomeFragment extends Fragment {
 /*            String results=user.getString("HOME_DATA");
             results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
             String[] array_result=results.split(",");*/
-
-
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-            MyStatAdapter adapter=new MyStatAdapter(itemData_list);
-
-            RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.home_recycleView);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-            recyclerView.setHasFixedSize(true);
+//Removing recyclerView on 1/18/2016 for new layout design
+//
+//
+//
+//            MyStatAdapter adapter=new MyStatAdapter(itemData_list);
+//
+//            RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.home_recycleView);
+//            recyclerView.setAdapter(adapter);
+//            recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+//            recyclerView.setHasFixedSize(true);
             /*
             Removed on 01/18/2016 to use new layout
             Populating the Car health at Top

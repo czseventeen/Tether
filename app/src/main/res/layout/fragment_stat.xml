@@ -6,29 +6,40 @@
     android:layout_height="match_parent"
     tools:context="jayxu.com.carassist.UI.HomeFragment"
     android:orientation="vertical"
-    android:background="@color/WHITE">
-    <FrameLayout
+    android:theme="@style/AppTheme">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@color/WHITE"
-        android:id="@+id/TopImage_Layout">
-        <com.github.lzyzsd.circleprogress.DonutProgress
-            android:id="@+id/donut_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:donut_progress="30"
-            app:donut_suffix_text=""
-            app:donut_text_size="45sp"
-            android:layout_gravity="center|bottom"
-            />
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@android:color/transparent"
+            android:id="@+id/mystat_placeholder1"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/DrivingScoreText"
-            android:layout_gravity="center_horizontal|top"
-            android:text="@string/DrivingScoreLabel" />
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="260dp"
+        android:id="@+id/mycar_TopImage_Layout">
+        <jayxu.com.carassist.UI.ScoreHexagonView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mystat_TopImage"
+            android:layout_gravity="center"
+            android:padding="10dp"/>
+
     </FrameLayout>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@android:color/transparent"
+            android:id="@+id/mystat_placeholder2"/>
+
+    </LinearLayout>
     <!--<ImageView-->
 
         <!--android:layout_width="match_parent"-->

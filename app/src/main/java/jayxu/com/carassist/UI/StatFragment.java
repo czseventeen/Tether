@@ -109,14 +109,17 @@ public class StatFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
+        //01/21/2016 removed driving score image placeholder
 //       Modify the TopView Progress Circle based on Driving Score
-        DonutProgress dount=(DonutProgress)rootView.findViewById(R.id.donut_progress);
-        dount.setProgress((int) drivingScore);
-        if(drivingScore >= 70){
-            dount.setFinishedStrokeColor(getResources().getColor(R.color.apptheme_color));
-        }
+//        DonutProgress dount=(DonutProgress)rootView.findViewById(R.id.donut_progress);
+//        dount.setProgress((int) drivingScore);
+//        if(drivingScore >= 70){
+//            dount.setFinishedStrokeColor(getResources().getColor(R.color.apptheme_color));
+//        }
 
-
+        ScoreHexagonView topImage= (ScoreHexagonView) rootView.findViewById(R.id.mystat_TopImage);
+        topImage.setPercentage(57);
+        topImage.invalidate();
 
 //        MyStatAdapter adapter2=new MyStatAdapter(dataArray2);
 //        RecyclerView recyclerView2=(RecyclerView)rootView.findViewById(R.id.stat_recycleView2);

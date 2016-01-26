@@ -2,22 +2,16 @@ package jayxu.com.carassist.UI;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.parse.ParseUser;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import jayxu.com.carassist.ADAPTER.MyStatAdapter;
 import jayxu.com.carassist.MODEL.ItemData;
 import jayxu.com.carassist.R;
 
@@ -76,14 +70,23 @@ public class MyCarFragment extends Fragment {
         //ImageView TopImage=(ImageView)rootView.findViewById(R.id.Top_imageView);
         //TopImage.setImageResource(R.drawable.teslar);
 
-        MyStatAdapter adapter=new MyStatAdapter(itemData_list);
-        RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.mycar_recycleView);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setHasFixedSize(true);
+//        MyStatAdapter adapter=new MyStatAdapter(itemData_list);
+//        RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.mycar_recycleView);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+//        recyclerView.setHasFixedSize(true);
 
-        NumberProgressBar batteryBar=(NumberProgressBar)rootView.findViewById(R.id.battery_bar);
-        batteryBar.setProgress(batteryLeft);
+//        HexgonView hexagon=new HexgonView(getActivity(), 39, 100 , 100);
+//        Drawable drawable = getResources().getDrawable(R.drawable.ab_solid_future);
+//        Bitmap b = HexgonView.getHexagonShape(100, 200, 200);
+        BatteryHexagonView topImage= (BatteryHexagonView) rootView.findViewById(R.id.mycar_TopImage);
+        topImage.setPercentage(10);
+
+        topImage.invalidate();
+//        topImage.setImageBitmap(b);
+        //1/21/2016 removed battery circle place holder
+//        NumberProgressBar batteryBar=(NumberProgressBar)rootView.findViewById(R.id.battery_bar);
+//        batteryBar.setProgress(batteryLeft);
 
 /*   Stop using ListView
      ListView listview=(ListView)rootView.findViewById(R.id.mycar_list);

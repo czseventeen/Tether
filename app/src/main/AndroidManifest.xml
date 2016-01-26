@@ -148,7 +148,8 @@
         <activity
             android:name=".UI.MapActivity"
             android:label="@string/title_activity_map"
-            android:parentActivityName=".UI.MainActivity" >
+            android:parentActivityName=".UI.MainActivity"
+            android:theme="@style/Theme.Future">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="jayxu.com.carassist.UI.MainActivity" />

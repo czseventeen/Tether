@@ -52,11 +52,10 @@ public class MainActivity extends AppCompatActivity{
 
         tabLayout.setupWithViewPager(mViewPager);
         ActionBar ab=getSupportActionBar();
-
 //        ab.setElevation(0);
 //        ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.apptheme_color)));
 //        ab.setTitle("");
-        ab.hide();
+
 
 
 

@@ -3,31 +3,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jayxu.com.carassist.UI.HomeFragment"
-    android:orientation="vertical"
-    android:background="@color/WHITE">
-    <FrameLayout
+    android:theme="@style/AppTheme"
+    android:orientation="vertical">
+
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@color/WHITE"
-        android:id="@+id/mycar_TopImage_Layout"
-        android:orientation="vertical"
-        >
+        android:layout_height="0dp"
+        android:layout_weight="20">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@android:color/transparent"
+            android:id="@+id/mycar_placeholder1"/>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="260dp"
+            android:id="@+id/mycar_TopImage_Layout"
+                android:layout_gravity="center_horizontal|bottom|left|right|top">
+            <jayxu.com.carassist.UI.BatteryHexagonView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mycar_TopImage"
+                android:layout_gravity="center"
+                android:padding="10dp"/>
 
-        <com.daimajia.numberprogressbar.NumberProgressBar
-            android:id="@+id/battery_bar"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+                <TextView
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="1%"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/mycar_batteryPercent"
+                    android:layout_gravity="center_horizontal|top" />
+        </FrameLayout>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@android:color/transparent"
+            android:id="@+id/mycar_placeholder2"/>
+    </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/YourBatteryLeft"
-            android:id="@+id/BatteryLeftText"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="30dp"
-            android:textColor="@color/apptheme_color" />
-    </FrameLayout>
     <!--<ImageView-->
 
         <!--android:layout_width="match_parent"-->
