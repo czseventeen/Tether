@@ -1,5 +1,7 @@
 package jayxu.com.carassist.MODEL;
 
+import android.graphics.Color;
+
 /**
  * Created by Yuchen on 1/17/2016.
  */
@@ -13,5 +15,7 @@ public class UsefulConstants {
     public static final String ParseClassNameMyCar="MyCar";
     public static final String ParseClassNameMyStats="MyStats";
 
+    public static final float DefaultInitCode = -999;
+    public static final int UnpaintedHexagonColor= Color.GRAY;
 
 }

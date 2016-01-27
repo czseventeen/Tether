@@ -1,6 +1,9 @@
 package jayxu.com.carassist.UI;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import jayxu.com.carassist.MODEL.ItemData;
+import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
 
 /**
@@ -20,7 +24,7 @@ import jayxu.com.carassist.R;
  */
 public class MyCarFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-
+    private BatteryHexagonView topImage;
 
     public static MyCarFragment newInstance(int sectionNumber) {
         MyCarFragment fragment = new MyCarFragment();
@@ -79,10 +83,12 @@ public class MyCarFragment extends Fragment {
 //        HexgonView hexagon=new HexgonView(getActivity(), 39, 100 , 100);
 //        Drawable drawable = getResources().getDrawable(R.drawable.ab_solid_future);
 //        Bitmap b = HexgonView.getHexagonShape(100, 200, 200);
-        BatteryHexagonView topImage= (BatteryHexagonView) rootView.findViewById(R.id.mycar_TopImage);
-        topImage.setPercentage(10);
+        topImage= (BatteryHexagonView) rootView.findViewById(R.id.mycar_TopImage);
+        topImage.setPercentage(1);
 
-        topImage.invalidate();
+        ObjectAnimator alphaAnimator=ObjectAnimator.ofFloat(topImage, "Percentage", 100);
+        alphaAnimator.setDuration(10000);
+        alphaAnimator.start();
 //        topImage.setImageBitmap(b);
         //1/21/2016 removed battery circle place holder
 //        NumberProgressBar batteryBar=(NumberProgressBar)rootView.findViewById(R.id.battery_bar);
@@ -96,5 +102,9 @@ public class MyCarFragment extends Fragment {
         return rootView;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        topImage.setPercentage(1);
+    }
 }
