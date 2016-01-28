@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
 import jayxu.com.carassist.UI.HomeFragment;
 import jayxu.com.carassist.UI.MyCarFragment;
@@ -39,13 +40,13 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment;
         switch(position){
             default:
-            case 0:
+            case UsefulConstants.PageIndex_Home:
                 fragment= HomeFragment.newInstance(position);
                 break;
-            case 1:
+            case UsefulConstants.PageIndex_MyCar:
                 fragment= MyCarFragment.newInstance(position);
                 break;
-            case 2:
+            case UsefulConstants.PageIndex_MyStat:
                 fragment= StatFragment.newInstance(position);
                 break;
         }

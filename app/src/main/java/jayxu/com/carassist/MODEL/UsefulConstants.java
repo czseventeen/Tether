@@ -18,4 +18,8 @@ public class UsefulConstants {
     public static final float DefaultInitCode = -999;
     public static final int UnpaintedHexagonColor= Color.GRAY;
 
+    public static final int PageIndex_Home= 0;
+    public static final int PageIndex_MyCar= 1;
+    public static final int PageIndex_MyStat= 2;
+
 }

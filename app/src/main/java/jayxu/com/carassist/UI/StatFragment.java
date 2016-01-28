@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.parse.ParseUser;
@@ -26,6 +28,9 @@ import jayxu.com.carassist.R;
  */
 public class StatFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static ScoreHexagonView topImage;
+    private static View rootView;
+
     public static StatFragment newInstance(int sectionNumber) {
         StatFragment fragment = new StatFragment();
         Bundle args = new Bundle();
@@ -102,7 +107,7 @@ public class StatFragment extends Fragment {
 
 
 
-        View rootView = inflater.inflate(R.layout.fragment_stat, container, false);
+        rootView = inflater.inflate(R.layout.fragment_stat, container, false);
         MyStatAdapter adapter=new MyStatAdapter(itemData_list);
         RecyclerView recyclerView=(RecyclerView)rootView.findViewById(R.id.Stat_recycleView);
         recyclerView.setAdapter(adapter);
@@ -117,9 +122,6 @@ public class StatFragment extends Fragment {
 //            dount.setFinishedStrokeColor(getResources().getColor(R.color.apptheme_color));
 //        }
 
-        ScoreHexagonView topImage= (ScoreHexagonView) rootView.findViewById(R.id.mystat_TopImage);
-        topImage.setPercentage(57);
-        topImage.invalidate();
 
 //        MyStatAdapter adapter2=new MyStatAdapter(dataArray2);
 //        RecyclerView recyclerView2=(RecyclerView)rootView.findViewById(R.id.stat_recycleView2);
@@ -132,6 +134,20 @@ public class StatFragment extends Fragment {
 /*Stop using ListView        ListView listview=(ListView)rootView.findViewById(R.id.stat_list);
         listview.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.list_text,R.id.list_text, array_result));*/
 
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        topImage= (ScoreHexagonView) rootView.findViewById(R.id.mystat_TopImage);
+        topImage.setPercentage(57);
+
+        TextView percentageText = (TextView)rootView.findViewById(R.id.mystat_ScorePercent);
+        percentageText.setText("57%");
+    }
+
+    public static View getMyCarView(){
         return rootView;
     }
 }

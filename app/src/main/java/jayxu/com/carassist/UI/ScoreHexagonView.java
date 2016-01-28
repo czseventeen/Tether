@@ -1,21 +1,20 @@
 package jayxu.com.carassist.UI;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.Display;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.TextView;
 
 import jayxu.com.carassist.MODEL.Coordinate;
+import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
 
 /**
@@ -24,12 +23,13 @@ import jayxu.com.carassist.R;
 public class ScoreHexagonView extends View {
 
     private Paint mHexagonPaint=new Paint();
-    private Paint mBatteryIndicatorPaint=new Paint();
+    private Paint mScoreIndicatorPaint =new Paint();
     private static final String TAG = ScoreHexagonView.class.getSimpleName() ;
     private static Path mHexagonBoarderPath;
-    private static Path mBatteryIndicatorPath;
+    private static Path mScoreIndicatorPath;
     private static float mPercentage;
     private static float mCurrentPercent;
+
 
 //    private float mWidth;
 //    private float mHeight;
@@ -47,75 +47,82 @@ public class ScoreHexagonView extends View {
 //    private float mStartingX;
 //    private float mStartingY;
 
-    private float mEndofValidX;
-    private float mEndofValidY;
+    private Coordinate mEndofIndicatorLine;
+//    private float mEndOfIndicatorLineX;
+//    private float mEndOfIndicatorLineY;
 
     private float mMaxPercentage;
 
-    private float mBatteryLineLength=300;
-    private int BatteryImgId;
-    private Rect BatteryImgBound;
+    private float mScoreLineLength =80;
+
+    private Rect SteeringWheelImgBound;
     public ScoreHexagonView(Context context) {
         super(context);
 
-        init();
+        init(UsefulConstants.DefaultInitCode);
     }
 
     public ScoreHexagonView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(UsefulConstants.DefaultInitCode);
     }
 
     public ScoreHexagonView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(UsefulConstants.DefaultInitCode);
     }
 
-    private void init(){
+    private void init(float DesiredPercent){
+        //initalzing the paintbrush for the Hexagon boarders.
         mHexagonPaint.setColor(getResources().getColor(R.color.apptheme_color));
         mHexagonPaint.setStrokeWidth(8);
         mHexagonPaint.setStyle(Paint.Style.STROKE);
         mHexagonPaint.setAntiAlias(true);
+        //initalizing the paint brush for the score line .
+        mScoreIndicatorPaint.setColor(getResources().getColor(R.color.apptheme_color));
+        mScoreIndicatorPaint.setStrokeWidth(4);
+        mScoreIndicatorPaint.setStyle(Paint.Style.STROKE);
+        mScoreIndicatorPaint.setAntiAlias(true);
+        //This variable contains the percentage of the score
+        mPercentage = 100;
+        if(DesiredPercent!=UsefulConstants.DefaultInitCode)
+            mPercentage=DesiredPercent;
 
-        mBatteryIndicatorPaint.setColor(getResources().getColor(R.color.apptheme_color));
-        mBatteryIndicatorPaint.setStrokeWidth(2);
-        mBatteryIndicatorPaint.setStyle(Paint.Style.STROKE);
-        mBatteryIndicatorPaint.setAntiAlias(true);
-        //This variable contains the percentage of the battery/driving score
-        mPercentage=100;
         mCurrentPercent=1;
-
 //        mWidth=getWidth();
 //        mHeight=getHeight();
 //        mWidth=this.getWidth();
 //        mHeight=this.getLayoutParams().height;
         DisplayMetrics screenSize=getResources().getDisplayMetrics();
 
-        Coordinate screenDimension=new Coordinate(screenSize.widthPixels, screenSize.heightPixels);
         float screenWidth=screenSize.widthPixels;
         float screenHeight=screenSize.heightPixels;
 
         //setting the height/width of the Entire View
-        mViewDimension=new Coordinate((float)(screenWidth/3.0),(float)(screenHeight/5.0));
+        mViewDimension=new Coordinate((float)(screenWidth),(float)(screenHeight/5.0));
         //below is the logic that will make sure the shortest side is being used as dimension referrence to set the dimensions of a perfect hexagon.
-
+        //setting the Hexagon Dimensions to make a perfect hexagon
         if(mViewDimension.getX()/2*Math.sqrt(3.0)<=mViewDimension.getY()){
             //use width as referrece, to calculated the height needed to draw a equal side hexagon
-            mHexagonDimension=new Coordinate(mViewDimension.getX(),(float)(mViewDimension.getX()/2.0*Math.sqrt(3.0)));
+            mHexagonDimension=new Coordinate((float)(mViewDimension.getX()*0.8),(float)(mViewDimension.getX()/2.0*Math.sqrt(3.0)*0.8));
         }else{
             //use height as referrece, to calculated the height needed to draw a equal side hexagon
-            mHexagonDimension=new Coordinate((float)(mViewDimension.getY()/Math.sqrt(3.0)*2.0),mViewDimension.getY());
-
+            mHexagonDimension=new Coordinate((float)(mViewDimension.getY()/Math.sqrt(3.0)*2.0*0.8),(float)(mViewDimension.getY()*0.8));
         }
 
         Coordinate ViewCenter=mViewDimension.getCenter();
 
-        //Using the center of the View as a referrence point, calculate the bound for the battery image by adding/substracting the Hexagon Width/Height
-        BatteryImgBound=new Rect( (int)(ViewCenter.getX()-(mHexagonDimension.getX()/2.0)),
-                (int)(ViewCenter.getY()-(mHexagonDimension.getY()/2.0)),
-                (int)(ViewCenter.getX()+(mHexagonDimension.getX()/2.0)),
-                (int)(ViewCenter.getY()+(mHexagonDimension.getY()/2.0)));
+        //Using the center of the View as a referrence point, calculate the bound for the score image by adding/substracting the Hexagon Width/2  and Height/2
+        //unlike the battery image, the score image needs to be fitted into a square. thus using the shortest side as a referrence to draw a square in the center
+        float SteeringWheelImgRadius=(float)(mHexagonDimension.getX()/2.0);
+        if(mHexagonDimension.getX()>mHexagonDimension.getY())
+            SteeringWheelImgRadius=(float)(mHexagonDimension.getY()/2.0);
 
+        SteeringWheelImgBound =new Rect( (int)(ViewCenter.getX()-SteeringWheelImgRadius),
+                (int)(ViewCenter.getY()-SteeringWheelImgRadius),
+                (int)(ViewCenter.getX()+SteeringWheelImgRadius),
+                (int)(ViewCenter.getY()+SteeringWheelImgRadius));
+        //set the starting Coordinate.
         mStartingCoordinate=new Coordinate((float)(ViewCenter.getX()+(mHexagonDimension.getX()/4.0)),
                 (float)(ViewCenter.getY()-(mHexagonDimension.getY()/2.0)));
 
@@ -135,9 +142,10 @@ public class ScoreHexagonView extends View {
 //            //use height as referrece, to calculated the height needed to draw a equal side hexagon
 //            mWidth= (float)(mHeight/Math.sqrt(3.0)*2.0);
 //        }
-
+        //the Path variable for the Hexagon boards
         mHexagonBoarderPath =new Path();
-        mBatteryIndicatorPath=new Path();
+        //The Path variable for the line that extends to indicate the score left
+        mScoreIndicatorPath =new Path();
 
 
         mHexagonBoarderPath.moveTo(mStartingCoordinate.getX(), mStartingCoordinate.getY());
@@ -146,9 +154,6 @@ public class ScoreHexagonView extends View {
 //        mCurrentY=mStartingY;
 
         mMaxPercentage=101;
-
-        //Selecting which image to use for the driving score
-        BatteryImgId=R.drawable.steering_wheel;
     }
 
     @Override
@@ -160,29 +165,45 @@ public class ScoreHexagonView extends View {
 //        canvas.drawBitmap(b, 100, 100 , p );
 
         //Draw the batter sign in the middle.
+        int steeringwheelImgId=R.drawable.steering_wheel;
 
 
-        Drawable batteryImg=getResources().getDrawable(BatteryImgId);
-        batteryImg.setBounds(BatteryImgBound);
-        batteryImg.draw(canvas);
+        Drawable SteeringWheelImg=getResources().getDrawable(steeringwheelImgId);
+        SteeringWheelImg.setBounds(SteeringWheelImgBound);
+        SteeringWheelImg.draw(canvas);
 
         boolean drawingGrayCircle=false;
         while(mCurrentPercent<=mMaxPercentage){
             if(mCurrentPercent>mPercentage && !drawingGrayCircle){
                 //draw the entire Valid Line;
                 canvas.drawPath(mHexagonBoarderPath, mHexagonPaint);
-                canvas.drawPath(mBatteryIndicatorPath,mBatteryIndicatorPaint);
+                canvas.drawPath(mScoreIndicatorPath, mScoreIndicatorPaint);
 //                    mHexagonPaint.setTextSize(100);
 //                    canvas.drawText((int)mPercentage+"%", mCurrentX, mCurrentY,  mHexagonPaint);
                 //Completed the Valid part with apptheme color. go on the drawing using grey
-                mHexagonPaint.setColor(Color.WHITE);
+
+
+                //Keep track of where the end of the indicator line is.
+                PathMeasure pm= new PathMeasure(mScoreIndicatorPath, false);
+                float lastCoordinate[]=new float[2];
+                pm.getPosTan(pm.getLength(), lastCoordinate , null);
+                //update the Textbox position based on the last point on the indicator line
+                TextView percentageText = (TextView)StatFragment.getMyCarView().findViewById(R.id.mystat_ScorePercent);
+                try {
+                    percentageText.setX(lastCoordinate[0]-50);
+                    percentageText.setY(lastCoordinate[1]-60);
+                }catch(NullPointerException e){
+                    Log.d(TAG, "Percentage Indicator line not drawn yet!");
+                }
+
+
+                //re initialize the paint to paint the rest of the hexagon using gray.
+                mHexagonPaint.setColor(UsefulConstants.UnpaintedHexagonColor);
                 mHexagonPaint.setStrokeWidth(4);
                 //starting to draw the invalid lines.
                 mHexagonBoarderPath=new Path();
                 mHexagonBoarderPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
-                //Keep track of where the end of the line is.
-                mEndofValidX=mCurrentCoordinate.getX();
-                mEndofValidY=mCurrentCoordinate.getY();
+
                 //Prevent this section code from exec again.
                 drawingGrayCircle=true;
             }
@@ -199,6 +220,9 @@ public class ScoreHexagonView extends View {
     }
 
     private void ComputeNextDot(){
+        if(mPercentage==100){
+            mPercentage++;
+        }
         float _17SegmentUnitWidth = (float) ((mHexagonDimension.getX()/4.0)/ mPercentageContainedInEachSegement);
         float _17SegmentUnitHeight= (float) ((mHexagonDimension.getY()/2.0)/ mPercentageContainedInEachSegement);
 
@@ -206,94 +230,113 @@ public class ScoreHexagonView extends View {
         float _16SegmentUnitHeight= (float) ((mHexagonDimension.getY()/2.0)/ 16.0);
 
         if(mCurrentPercent > 0 && mCurrentPercent <= 17){
-            //drawing @ 315 degrees
+            //drawing @ 180 degrees
             //1-17%
-            mHexagonBoarderPath.rLineTo(-2*_17SegmentUnitWidth, 0);
-            mCurrentCoordinate.setX(mCurrentCoordinate.getX()-2*_17SegmentUnitWidth);
+            mHexagonBoarderPath.rLineTo((float)-2.0*_17SegmentUnitWidth, 0);
+            mCurrentCoordinate.setX((float)(mCurrentCoordinate.getX()-2.0*_17SegmentUnitWidth));
 
             //check if valid line has ended:
             if(mCurrentPercent==mPercentage){
-                mBatteryIndicatorPath.reset();
-                mBatteryIndicatorPath.moveTo(mCurrentCoordinate.getX(),mCurrentCoordinate.getY());
-                mBatteryIndicatorPath.rLineTo(0, -mBatteryLineLength);
+                mScoreIndicatorPath.reset();
+                mScoreIndicatorPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
+//                //Draw a line @ 180 degress to for score
+                mScoreIndicatorPath.rLineTo((float) (-mScoreLineLength - ((17 - mCurrentPercent) * 2.0 * _17SegmentUnitWidth)), 0);
+                //No need to draw the rest of the hexagon side in GRAY, just gonna skip to drawing next side.
+                //move the boarder path/ currentCoordinate to the end of the side
+                //mHexagonBoarderPath.rLineTo((-2*_17SegmentUnitWidth)*(17-mCurrentPercent), 0);
+                mCurrentCoordinate.setX((float)(mCurrentCoordinate.getX()+(-2.0*_17SegmentUnitWidth)*(17.0-mCurrentPercent)));
+                mCurrentPercent=17;
+
             }
 
 
         }else if(mCurrentPercent> 17 && mCurrentPercent <= 34){
 
-            //drawing @ 90 degrees
+            //drawing @ 225 degrees
             //18-34%
             mHexagonBoarderPath.rLineTo(-_17SegmentUnitWidth, +_17SegmentUnitHeight);
             mCurrentCoordinate.setX(mCurrentCoordinate.getX()-_17SegmentUnitWidth);
             mCurrentCoordinate.setY(mCurrentCoordinate.getY()+_17SegmentUnitHeight);
-            //draw the battery percentage display line
+            //draw the score percentage display line
 
             if(mCurrentPercent==mPercentage){
-                mBatteryIndicatorPath.reset();
-                mBatteryIndicatorPath.moveTo(mCurrentCoordinate.getX(),mCurrentCoordinate.getY());
-                mBatteryIndicatorPath.rLineTo(-mBatteryLineLength, 0);
+                mScoreIndicatorPath.reset();
+                mScoreIndicatorPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
+                mScoreIndicatorPath.rLineTo(-mScoreLineLength, 0);
             }
 
 
         }else if(mCurrentPercent > 34 && mCurrentPercent <= 50){
             //35-50% this segment is only 16%
-            //drawing @ 45 degrees
+            //drawing @ 315 degrees
             mHexagonBoarderPath.rLineTo(_16SegmentUnitWidth, _16SegmentUnitHeight);
             mCurrentCoordinate.setX(mCurrentCoordinate.getX()+_16SegmentUnitWidth);
             mCurrentCoordinate.setY(mCurrentCoordinate.getY()+_16SegmentUnitHeight);
-            //draw the battery percentage display line
+            //draw the score percentage display line
 
             if(mCurrentPercent==mPercentage){
-                mBatteryIndicatorPath.reset();
-                mBatteryIndicatorPath.moveTo(mCurrentCoordinate.getX(),mCurrentCoordinate.getY());
-                mBatteryIndicatorPath.rLineTo(-mBatteryLineLength, 0);
+                mScoreIndicatorPath.reset();
+                mScoreIndicatorPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
+                mScoreIndicatorPath.rLineTo(-mScoreLineLength, 0);
             }
 
         }else if(mCurrentPercent > 50&& mCurrentPercent <= 67){
             //51-67
-            //drawing @ 135 degrees
+            //drawing @ 180 degrees
             mHexagonBoarderPath.rLineTo(2*_17SegmentUnitWidth, 0);
-            mCurrentCoordinate.setX(mCurrentCoordinate.getX()+2*_17SegmentUnitWidth);
-            //draw the battery percentage display line
+            mCurrentCoordinate.setX((float)(mCurrentCoordinate.getX()+2.0*_17SegmentUnitWidth));
+            //draw the score percentage display line
             if(mCurrentPercent==mPercentage){
-                mBatteryIndicatorPath.reset();
-                mBatteryIndicatorPath.moveTo(mCurrentCoordinate.getX(),mCurrentCoordinate.getY());
-                mBatteryIndicatorPath.rLineTo(0, +mBatteryLineLength);
+                mScoreIndicatorPath.reset();
+                mScoreIndicatorPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
+                mScoreIndicatorPath.rLineTo((float) (mScoreLineLength + ((67.0 - mCurrentPercent) * 2.0 * _17SegmentUnitWidth)), 0);
+//                //No need to draw the rest of the hexagon side in GRAY, just gonna skip to drawing next side.
+//                //move the boarder path/ currentCoordinate to the end of the side
+//                //mHexagonBoarderPath.rLineTo((2*_17SegmentUnitWidth)*(67-mCurrentPercent), 0);
+                mCurrentCoordinate.setX((float) (mCurrentCoordinate.getX() + (2.0 * _17SegmentUnitWidth) * (67.0 - mCurrentPercent)));
+                mCurrentPercent=67;
             }
 
         }else if(mCurrentPercent > 67 && mCurrentPercent <= 84){
             //68-84
-            //drawing @ 180 degrees
+            //drawing @ 45 degrees
             mHexagonBoarderPath.rLineTo(_17SegmentUnitWidth, -_17SegmentUnitHeight);
             mCurrentCoordinate.setX(mCurrentCoordinate.getX()+_17SegmentUnitWidth);
             mCurrentCoordinate.setY(mCurrentCoordinate.getY()-_17SegmentUnitHeight);
-            //draw the battery percentage display line
+            //draw the score percentage display line
 
             if(mCurrentPercent==mPercentage){
-                mBatteryIndicatorPath.reset();
-                mBatteryIndicatorPath.moveTo(mCurrentCoordinate.getX(),mCurrentCoordinate.getY());
-                mBatteryIndicatorPath.rLineTo(+mBatteryLineLength, 0);
+                mScoreIndicatorPath.reset();
+                mScoreIndicatorPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
+                mScoreIndicatorPath.rLineTo(+mScoreLineLength, 0);
             }
 
         }else if(mCurrentPercent > 84 && mCurrentPercent <= mMaxPercentage){
             //85-100, this segment is only 16%
-            //drawing @ 225 degrees
+            //drawing @ 135 degrees
             mHexagonBoarderPath.rLineTo(-_16SegmentUnitWidth, -_16SegmentUnitHeight);
             mCurrentCoordinate.setX(mCurrentCoordinate.getX()-_16SegmentUnitWidth);
             mCurrentCoordinate.setY(mCurrentCoordinate.getY()-_16SegmentUnitHeight);
-            //draw the battery percentage display line
+            //draw the score percentage display line
 
             if(mCurrentPercent==mPercentage){
-                mBatteryIndicatorPath.reset();
-                mBatteryIndicatorPath.moveTo(mCurrentCoordinate.getX(),mCurrentCoordinate.getY());
-                mBatteryIndicatorPath.rLineTo(+mBatteryLineLength, 0);
+                mScoreIndicatorPath.reset();
+                mScoreIndicatorPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
+                mScoreIndicatorPath.rLineTo(+mScoreLineLength, 0);
             }
         }
     }
 
     public void setPercentage(float percentage){
-        mPercentage=percentage;
+        init(percentage);
     }
+    public float getPercentage(){
+        if(mPercentage==101)
+            return 100;
+        return mPercentage;
+    }
+
+
 //    public float getmWidth() {
 //        return mWidth;
 //    }
@@ -316,6 +359,10 @@ public class ScoreHexagonView extends View {
         int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
         this.setMeasuredDimension(parentWidth, parentHeight);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    public Coordinate getLastIndicatorLinePos(){
+        return mEndofIndicatorLine;
     }
 
 }

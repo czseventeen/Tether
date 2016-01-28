@@ -8,12 +8,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseUser;
 
 import jayxu.com.carassist.ADAPTER.TabPagerAdapter;
+import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
 
 public class MainActivity extends AppCompatActivity{
@@ -26,12 +28,12 @@ public class MainActivity extends AppCompatActivity{
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    TabPagerAdapter mTabPageAdapter;
-
+    private TabPagerAdapter mTabPageAdapter;
+    private static TabLayout mTabLayout;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
 
 
     @Override
@@ -43,15 +45,34 @@ public class MainActivity extends AppCompatActivity{
         mViewPager=(ViewPager)findViewById(R.id.Main_Tab_Pager);
         mViewPager.setAdapter(new TabPagerAdapter(getSupportFragmentManager(), MainActivity.this));
 
-        TabLayout tabLayout=(TabLayout)findViewById(R.id.sliding_tabs);
+        mTabLayout=(TabLayout)findViewById(R.id.sliding_tabs);
 //        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.WHITE));
 //        tabLayout.setTabMode(TabLayout.MODE_FIXED);
 //        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 //        tabLayout.setBackgroundColor(getResources().getColor(R.color.apptheme_color));
 //        tabLayout.setTabTextColors(getResources().getColor(R.color.WHITE), getResources().getColor(R.color.WHITE));
 
-        tabLayout.setupWithViewPager(mViewPager);
-        ActionBar ab=getSupportActionBar();
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Log.d("~~~~~~", "The tab selected was "+tab.getPosition());
+                if(tab.getPosition()== UsefulConstants.PageIndex_MyCar){
+//                    MyCarFragment.startAnimation();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+//        ActionBar ab=getSupportActionBar();
 //        ab.setElevation(0);
 //        ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.apptheme_color)));
 //        ab.setTitle("");
@@ -132,6 +153,10 @@ public class MainActivity extends AppCompatActivity{
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static int getSelectedTabPos(){
+        return mTabLayout.getSelectedTabPosition();
     }
 
 

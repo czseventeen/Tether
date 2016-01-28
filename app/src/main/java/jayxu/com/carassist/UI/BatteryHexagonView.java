@@ -7,13 +7,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import jayxu.com.carassist.MODEL.Coordinate;
 import jayxu.com.carassist.MODEL.UsefulConstants;
@@ -49,12 +52,13 @@ public class BatteryHexagonView extends View {
 //    private float mStartingX;
 //    private float mStartingY;
 
-    private float mEndofValidX;
-    private float mEndofValidY;
+    private Coordinate mEndofIndicatorLine;
+//    private float mEndOfIndicatorLineX;
+//    private float mEndOfIndicatorLineY;
 
     private float mMaxPercentage;
 
-    private float mBatteryLineLength=150;
+    private float mBatteryLineLength=80;
 
     private Rect BatteryImgBound;
     public BatteryHexagonView(Context context) {
@@ -90,7 +94,6 @@ public class BatteryHexagonView extends View {
             mPercentage=DesiredPercent;
 
         mCurrentPercent=1;
-
 //        mWidth=getWidth();
 //        mHeight=getHeight();
 //        mWidth=this.getWidth();
@@ -101,7 +104,7 @@ public class BatteryHexagonView extends View {
         float screenHeight=screenSize.heightPixels;
 
         //setting the height/width of the Entire View
-        mViewDimension=new Coordinate((float)(screenWidth/2.0),(float)(screenHeight/5.0));
+        mViewDimension=new Coordinate((float)(screenWidth),(float)(screenHeight/5.0));
         //below is the logic that will make sure the shortest side is being used as dimension referrence to set the dimensions of a perfect hexagon.
         //setting the Hexagon Dimensions to make a perfect hexagon
         if(mViewDimension.getX()/2*Math.sqrt(3.0)<=mViewDimension.getY()){
@@ -185,14 +188,29 @@ public class BatteryHexagonView extends View {
 //                    mHexagonPaint.setTextSize(100);
 //                    canvas.drawText((int)mPercentage+"%", mCurrentX, mCurrentY,  mHexagonPaint);
                 //Completed the Valid part with apptheme color. go on the drawing using grey
+
+
+                //Keep track of where the end of the indicator line is.
+                PathMeasure pm= new PathMeasure(mBatteryIndicatorPath, false);
+                float lastCoordinate[]=new float[2];
+                pm.getPosTan(pm.getLength(), lastCoordinate , null);
+                //update the Textbox position based on the last point on the indicator line
+                TextView percentageText = (TextView)MyCarFragment.getMyCarView().findViewById(R.id.mycar_batteryPercent);
+                try {
+                    percentageText.setX(lastCoordinate[0]-50);
+                    percentageText.setY(lastCoordinate[1]-60);
+                }catch(NullPointerException e){
+                    Log.d(TAG, "Percentage Indicator line not drawn yet!");
+                }
+
+
+                //re initialize the paint to paint the rest of the hexagon using gray.
                 mHexagonPaint.setColor(UsefulConstants.UnpaintedHexagonColor);
                 mHexagonPaint.setStrokeWidth(4);
                 //starting to draw the invalid lines.
                 mHexagonBoarderPath=new Path();
                 mHexagonBoarderPath.moveTo(mCurrentCoordinate.getX(), mCurrentCoordinate.getY());
-                //Keep track of where the end of the line is.
-                mEndofValidX=mCurrentCoordinate.getX();
-                mEndofValidY=mCurrentCoordinate.getY();
+
                 //Prevent this section code from exec again.
                 drawingGrayCircle=true;
             }
@@ -318,7 +336,6 @@ public class BatteryHexagonView extends View {
 
     public void setPercentage(float percentage){
         init(percentage);
-        this.invalidate();
     }
     public float getPercentage(){
         if(mPercentage==101)
@@ -349,6 +366,10 @@ public class BatteryHexagonView extends View {
         int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
         this.setMeasuredDimension(parentWidth, parentHeight);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    public Coordinate getLastIndicatorLinePos(){
+        return mEndofIndicatorLine;
     }
 
 }
