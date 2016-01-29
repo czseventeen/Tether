@@ -94,18 +94,33 @@
     tools:context="jayxu.com.carassist.UI.HomeFragment"
     android:orientation="vertical">
 
+    <jayxu.com.carassist.UI.HomeHexagonView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/HomeHexagonView"
+        android:layout_gravity="left|top"
+        />
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:id="@+id/home_centercar"
-        android:layout_gravity="center"
-        android:src="@drawable/teslas" />
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_wallet"
+        android:id="@+id/home_money"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/home_tirepressure"
-        android:layout_gravity="left|top" />
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_mpg"
+        android:id="@+id/home_mpg"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_gas_station"
+        android:id="@+id/home_chargeStation"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_locate"
+        android:id="@+id/home_health"/>
 
 </FrameLayout>

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import jayxu.com.carassist.ADAPTER.MyStatAdapter;
+import jayxu.com.carassist.MODEL.Home;
 import jayxu.com.carassist.MODEL.ItemData;
 import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
@@ -35,9 +36,11 @@ public class HomeFragment extends Fragment {
          * The fragment argument representing the section number for this
          * fragment.
          */
+        private static HomeHexagonView topImage;
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
+        private static View rootView;
+    /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
@@ -91,7 +94,7 @@ public class HomeFragment extends Fragment {
 /*            String results=user.getString("HOME_DATA");
             results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
             String[] array_result=results.split(",");*/
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+            rootView = inflater.inflate(R.layout.fragment_home, container, false);
 //Removing recyclerView on 1/18/2016 for new layout design
 //
 //
@@ -129,11 +132,21 @@ public class HomeFragment extends Fragment {
             return rootView;
         }
 
+        public void onResume() {
+            super.onResume();
+            topImage= (HomeHexagonView) rootView.findViewById(R.id.HomeHexagonView);
+            topImage.invalidate();
+
+        }
+
        /* @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
             ((HomeActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }*/
+        public static View getHomeRootView(){
+            return rootView;
+        }
     }
 
