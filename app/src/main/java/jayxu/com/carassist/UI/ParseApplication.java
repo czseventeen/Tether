@@ -3,6 +3,7 @@ package jayxu.com.carassist.UI;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 
 import com.parse.Parse;
@@ -15,10 +16,12 @@ import com.tencent.android.tpush.service.XGPushService;
  * Created by Yuchen on 12/1/2015.
  */
 public class ParseApplication extends Application {
+    public static Resources resources;
+
     @Override
     public void onCreate() {
         super.onCreate();
-
+        resources=getResources();
 		/*
 		 * Add Parse initialization code here
 		 */

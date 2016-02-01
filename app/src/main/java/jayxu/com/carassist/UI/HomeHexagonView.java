@@ -54,7 +54,7 @@ import jayxu.com.carassist.R;
 
         private void init(){
             //initalzing the paintbrush for the Hexagon boarders.
-            mHexagonPaint.setColor(UsefulConstants.UnpaintedHexagonColor);
+            mHexagonPaint.setColor(getResources().getColor(R.color.apptheme_color));
             mHexagonPaint.setStrokeWidth(8);
             mHexagonPaint.setStyle(Paint.Style.STROKE);
             mHexagonPaint.setAntiAlias(true);
@@ -119,18 +119,40 @@ import jayxu.com.carassist.R;
                 ImageView home_health=(ImageView)HomeFragment.getHomeRootView().findViewById(R.id.home_health);
                 home_health.setX(endpoints.get(0).getX()-home_health.getWidth()/2);
                 home_health.setY(endpoints.get(0).getY()-home_health.getHeight()/2);
+                //Create a Hexagon Background for each button.
+                drawSmallHexagon(canvas,
+                        new Coordinate(endpoints.get(0).getX(), endpoints.get(0).getY())
+                        ,home_health.getWidth()
+                        ,home_health.getHeight());
+
 
                 ImageView home_money=(ImageView)HomeFragment.getHomeRootView().findViewById(R.id.home_money);
                 home_money.setX(endpoints.get(1).getX()-home_money.getWidth()/2);
                 home_money.setY(endpoints.get(1).getY()-home_money.getHeight()/2);
+                //Create a Hexagon Background for each button.
+                drawSmallHexagon(canvas,
+                        new Coordinate(endpoints.get(1).getX(), endpoints.get(1).getY())
+                        ,home_money.getWidth()
+                        ,home_money.getHeight());
+
 
                 ImageView home_chargstation=(ImageView)HomeFragment.getHomeRootView().findViewById(R.id.home_chargeStation);
                 home_chargstation.setX(endpoints.get(3).getX()-home_chargstation.getWidth()/2);
                 home_chargstation.setY(endpoints.get(3).getY()-home_chargstation.getHeight()/2);
+                //Create a Hexagon Background for each button.
+                drawSmallHexagon(canvas,
+                        new Coordinate(endpoints.get(3).getX(), endpoints.get(3).getY())
+                        ,home_chargstation.getWidth()
+                        ,home_chargstation.getHeight());
 
                 ImageView home_mpg=(ImageView)HomeFragment.getHomeRootView().findViewById(R.id.home_mpg);
                 home_mpg.setX(endpoints.get(4).getX()-home_mpg.getWidth()/2);
                 home_mpg.setY(endpoints.get(4).getY()-home_mpg.getHeight()/2);
+                //Create a Hexagon Background for each button.
+                drawSmallHexagon(canvas,
+                        new Coordinate(endpoints.get(4).getX(), endpoints.get(4).getY())
+                        ,home_mpg.getWidth()
+                        ,home_mpg.getHeight());
             }
 
         }
@@ -159,6 +181,40 @@ import jayxu.com.carassist.R;
             int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
             this.setMeasuredDimension(parentWidth, parentHeight);
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+
+        protected void drawSmallHexagon(Canvas canvs, Coordinate center, float width, float height){
+            //Check which side is longer, base on that side to figure out the
+            Coordinate SmallHexagonDimension;
+            Path smallHexagonPath=new Path();
+            if(width/2*Math.sqrt(3.0)<=height){
+                //use height as referrece, to calculated the height needed to draw a equal side hexagon
+                SmallHexagonDimension=new Coordinate((float)(height/Math.sqrt(3.0)*2.0*1.0),(float)(height*1.0));
+            }else{
+
+                //use width as referrece, to calculated the height needed to draw a equal side hexagon
+
+                SmallHexagonDimension=new Coordinate((float)(width*1.0),(float)(width/2.0*Math.sqrt(3.0)*1.0));
+            }
+
+            smallHexagonPath.moveTo(center.getX()-(float)(SmallHexagonDimension.getX()/2.0), center.getY());
+            float UnitWidth=(float)(SmallHexagonDimension.getX()/4.0);
+            float UnitHeight=(float)(SmallHexagonDimension.getY()/2.0);
+
+            smallHexagonPath.rLineTo(UnitWidth,UnitHeight);
+            smallHexagonPath.rLineTo(2*UnitWidth, 0);
+            smallHexagonPath.rLineTo(UnitWidth, -UnitHeight);
+            smallHexagonPath.rLineTo(-UnitWidth, -UnitHeight);
+            smallHexagonPath.rLineTo(-2*UnitWidth,0 );
+            smallHexagonPath.rLineTo(-UnitWidth, UnitHeight);
+
+            Paint SmallHexagonPaint=new Paint();
+
+            SmallHexagonPaint.setColor(Color.WHITE);
+            SmallHexagonPaint.setStyle(Paint.Style.FILL);
+
+            canvs.drawPath(smallHexagonPath, SmallHexagonPaint);
+
         }
 
 

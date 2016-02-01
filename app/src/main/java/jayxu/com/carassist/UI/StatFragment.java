@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.parse.ParseUser;
 
 import org.json.JSONException;
@@ -21,15 +20,19 @@ import java.util.Iterator;
 
 import jayxu.com.carassist.ADAPTER.MyStatAdapter;
 import jayxu.com.carassist.MODEL.ItemData;
+import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
 
 /**
  * Created by Yuchen on 12/1/2015.
  */
 public class StatFragment extends Fragment {
+    private static final String TAG =StatFragment.class.getSimpleName();
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static ScoreHexagonView topImage;
     private static View rootView;
+    private static float drivingScore=0;
+
 
     public static StatFragment newInstance(int sectionNumber) {
         StatFragment fragment = new StatFragment();
@@ -37,6 +40,7 @@ public class StatFragment extends Fragment {
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+
     }
 
     public StatFragment() {
@@ -50,35 +54,47 @@ public class StatFragment extends Fragment {
         * Use the following section of code to grab the current user's Mystat page data
         */
         ParseUser user=ParseUser.getCurrentUser();
-        JSONObject mystat_results = null;
+        JSONObject mystat_results;
         ArrayList<ItemData> itemData_list=new ArrayList<>();
-        float drivingScore=0;
-//        try {
-//             mystat_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.MyStat_JSON_KEY));
-//
-//        if(mystat_results!=null){
-//            Iterator<String> iterator=mystat_results.keys();
-//            while(iterator.hasNext()){
-//                ItemData temp_item=new ItemData();
-//
-//                String key=iterator.next();
-//
-//                temp_item.setDescription(key);
-//                temp_item.setValue(mystat_results.getString(key));
-//                if(key.equals(getString(R.string.DrivingScore))){
-//                    drivingScore=Float.valueOf(temp_item.getValue());
-//                    continue;
-//                }
-//                itemData_list.add(temp_item);
-//
-//            }
-//
-//        }
-//        }catch (JSONException e){
-//            e.printStackTrace();
-//        }catch (NullPointerException e){
-//            e.printStackTrace();
-//        }
+
+        try {
+            mystat_results=user.getJSONObject(UsefulConstants.ParseAttrNameAllStats).getJSONObject(UsefulConstants.ParseClassNameMyStats);
+
+        if(mystat_results!=null){
+            Iterator<String> iterator=mystat_results.keys();
+            while(iterator.hasNext()){
+                ItemData temp_item=new ItemData();
+
+                String key=iterator.next();
+
+                temp_item.setDescriptionKey(key);
+                String value=mystat_results.getString(key);
+                try {
+                    //need to round to the nearest 100th.
+                    double roundedValue= Double.valueOf(mystat_results.getString(key));
+                    roundedValue = Math.round(roundedValue * 100.0) / 100.0;
+                    value=roundedValue+"";
+                }catch (NumberFormatException e){
+                    Log.d(TAG, "This "+key+"wasn't a double!");
+                }
+                temp_item.setValue(value);
+                if(UsefulConstants.Description_Stringmapping.get(key).equals(R.string.DrivingScore)){
+                    drivingScore=Float.valueOf(temp_item.getValue());
+                    continue;
+                }
+                itemData_list.add(temp_item);
+
+            }
+
+        }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }catch (IllegalStateException e){
+            Log.e(TAG, "The particular attribute might not exist.");
+            e.printStackTrace();
+        }
 
 
 
@@ -141,10 +157,11 @@ public class StatFragment extends Fragment {
     public void onResume() {
         super.onResume();
         topImage= (ScoreHexagonView) rootView.findViewById(R.id.mystat_TopImage);
-        topImage.setPercentage(57);
-
+        topImage.setPercentage(drivingScore);
+//        topImage.setPercentage(100);
+        int drivesocre=(int)drivingScore;
         TextView percentageText = (TextView)rootView.findViewById(R.id.mystat_ScorePercent);
-        percentageText.setText("57%");
+        percentageText.setText(""+drivesocre);
     }
 
     public static View getMyCarView(){

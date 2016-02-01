@@ -82,20 +82,18 @@ public class MyCar {
 
     public JSONObject getJSON(Context context) throws JSONException {
         JSONObject jsonobj=new JSONObject();
-        jsonobj.put(context.getString(R.string.BatteryLeft), this.getBatteryLeft()); //+"%"
-        jsonobj.put(context.getString(R.string.BatteryTemp), this.getBatteryTemp()); //+"C"
-        jsonobj.put(context.getString(R.string.BatteryCapacity), this.getBatteryCapacity());
-        jsonobj.put(context.getString(R.string.FuelEconomy), this.getFuelEconomy());
-        jsonobj.put(context.getString(R.string.Brand), this.getBrand());
-        jsonobj.put(context.getString(R.string.SeatingCapacity), this.getSeatingCapacity());
-        jsonobj.put(context.getString(R.string.HorsePower), this.getHorsePower());
-        jsonobj.put(context.getString(R.string.MaxRPM), this.getMaxRPM());
-        jsonobj.put(context.getString(R.string.TopSpeed), this.getTopSpeed());
-        jsonobj.put(context.getString(R.string.ZeroToSixtyTime), this.getZeroToSixtyTime());
-        jsonobj.put(context.getString(R.string.EstimateValue), this.getEstimateValue());
-        jsonobj.put(context.getString(R.string.TotalMilesDriven), this.getTotalMilesDriven());
-
-
+        jsonobj.put("BatteryLeft", this.getBatteryLeft()); //+"%"
+        jsonobj.put("BatteryTemp", this.getBatteryTemp()); //+"C"
+        jsonobj.put("BatteryCapacity", this.getBatteryCapacity());
+        jsonobj.put("FuelEconomy", this.getFuelEconomy());
+        jsonobj.put("Brand", this.getBrand());
+        jsonobj.put("SeatingCapacity", this.getSeatingCapacity());
+        jsonobj.put("HorsePower", this.getHorsePower());
+        jsonobj.put("MaxRPM", this.getMaxRPM());
+        jsonobj.put("TopSpeed", this.getTopSpeed());
+        jsonobj.put("ZeroToSixtyTime", this.getZeroToSixtyTime());
+        jsonobj.put("EstimateValue", this.getEstimateValue());
+        jsonobj.put("TotalMilesDriven", this.getTotalMilesDriven());
         return jsonobj;
     }
 

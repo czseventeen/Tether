@@ -19,7 +19,6 @@ public class MyStats  {
     private double MilesDrivenThisCharge;
     private double AverageMilesDrivenPerAH;
     private double MaxMilesDrivenPerAH;
-    private double FuelEconomy;
 
     private int DrivingScore;
     private int NumOfSuddenBreak;
@@ -51,7 +50,6 @@ public class MyStats  {
 
         MilesDrivenThisCharge = 0;
         MaxMilesDrivenPerAH = 0;
-        FuelEconomy = 0;
         FastestSpeedDriven = 0;
 
         NumOfSuddenBreak = 0;
@@ -71,7 +69,6 @@ public class MyStats  {
         MilesDrivenThisCharge = r.nextInt(500);
         AverageMilesDrivenPerAH =r.nextInt(500);
         MaxMilesDrivenPerAH = r.nextInt(500);
-        FuelEconomy = r.nextInt(500);
         FastestSpeedDriven = r.nextInt(200);
         NumOfSuddenBreak = r.nextInt(100);
         NumOfSuddenAccelerate = r.nextInt(100);
@@ -92,29 +89,25 @@ public class MyStats  {
 
     public JSONObject getJSON(Context context) throws JSONException{
         JSONObject jsonobj=new JSONObject();
-        jsonobj.put(context.getString(R.string.AverageTimeSpentInTrafficDaily),this.getAverageTimeSpentInTrafficDaily());//+" min"
-        jsonobj.put(context.getString(R.string.FuelEconomy),this.getFuelEconomy()); //+" MPG"
-        jsonobj.put(context.getString(R.string.DrivingScore),this.getDrivingScore());
-        jsonobj.put(context.getString(R.string.AverageDailyDriveTime),this.getAverageDailyDriveTime());
-        jsonobj.put(context.getString(R.string.AverageDailyMilesDriven), this.getAverageDailyMilesDriven());
-        jsonobj.put(context.getString(R.string.MilesDrivenThisCharge), this.getMilesDrivenThisCharge());
-        jsonobj.put(context.getString(R.string.TimeDrivenThisCharge), this.getTimeDrivenThisCharge());
-        jsonobj.put(context.getString(R.string.AverageMilesDrivenPerAH), this.getAverageDrivingTimePerAH());
-        jsonobj.put(context.getString(R.string.AverageDrivingTimePerAH), this.getAverageDrivingTimePerAH());
-        jsonobj.put(context.getString(R.string.MaxMilesDrivenPerAH), this.getMaxMilesDrivenPerAH());
-        jsonobj.put(context.getString(R.string.FastestSpeedDriven), this.getFastestSpeedDriven());
-        jsonobj.put(context.getString(R.string.NumOfSuddenBreak), this.getNumOfSuddenBreak());
-        jsonobj.put(context.getString(R.string.NumOfSuddenAccelerate), this.getNumOfSuddenAccelerate());
-        jsonobj.put(context.getString(R.string.NumOfSuddenTurn), this.getNumOfSuddenTurn());
-        jsonobj.put(context.getString(R.string.NumOfAccident), this.getNumOfAccident());
-        jsonobj.put(context.getString(R.string.AverageCostPerMile), this.getAverageCostPerMile());
-        jsonobj.put(context.getString(R.string.TotalDrivingTime), this.getTotalDrivingTime());
-        jsonobj.put(context.getString(R.string.TotalMilesDriven), this.getTotalMilesDriven());
-        jsonobj.put(context.getString(R.string.AverageSpeedDriven), this.getAverageSpeedDriven());
-        jsonobj.put(context.getString(R.string.TotalTimeSpentInTraffic), this.getTotalTimeSpentInTraffic());
-
-
-
+        jsonobj.put("AverageTimeSpentInTrafficDaily",this.getAverageTimeSpentInTrafficDaily());//+" min"
+        jsonobj.put("DrivingScore",this.getDrivingScore());
+        jsonobj.put("AverageDailyDriveTime",this.getAverageDailyDriveTime());
+        jsonobj.put("AverageDailyMilesDriven", this.getAverageDailyMilesDriven());
+        jsonobj.put("MilesDrivenThisCharge", this.getMilesDrivenThisCharge());
+        jsonobj.put("TimeDrivenThisCharge", this.getTimeDrivenThisCharge());
+        jsonobj.put("AverageMilesDrivenPerAH", this.getAverageDrivingTimePerAH());
+        jsonobj.put("AverageDrivingTimePerAH", this.getAverageDrivingTimePerAH());
+        jsonobj.put("MaxMilesDrivenPerAH", this.getMaxMilesDrivenPerAH());
+        jsonobj.put("FastestSpeedDriven", this.getFastestSpeedDriven());
+        jsonobj.put("NumOfSuddenBreak", this.getNumOfSuddenBreak());
+        jsonobj.put("NumOfSuddenAccelerate", this.getNumOfSuddenAccelerate());
+        jsonobj.put("NumOfSuddenTurn", this.getNumOfSuddenTurn());
+        jsonobj.put("NumOfAccident", this.getNumOfAccident());
+        jsonobj.put("AverageCostPerMile", this.getAverageCostPerMile());
+        jsonobj.put("TotalDrivingTime", this.getTotalDrivingTime());
+        jsonobj.put("TotalMilesDriven", this.getTotalMilesDriven());
+        jsonobj.put("AverageSpeedDriven", this.getAverageSpeedDriven());
+        jsonobj.put("TotalTimeSpentInTraffic", this.getTotalTimeSpentInTraffic());
         return jsonobj;
     }
 
@@ -157,14 +150,6 @@ public class MyStats  {
 
     public void setMaxMilesDrivenPerAH(double maxMilesDrivenPerAH) {
         MaxMilesDrivenPerAH = maxMilesDrivenPerAH;
-    }
-
-    public double getFuelEconomy() {
-        return FuelEconomy;
-    }
-
-    public void setFuelEconomy(double fuelEconomy) {
-        FuelEconomy = fuelEconomy;
     }
 
     public double getFastestSpeedDriven() {

@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/mystat_TopImage"
-            android:layout_gravity="center"
-            android:padding="10dp"/>
+            android:layout_gravity="center" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,9 +27,23 @@
             android:text="1%"
             android:background="@android:color/transparent"
             android:id="@+id/mystat_ScorePercent"
-            android:layout_gravity="left|center_vertical" />
-    </FrameLayout>
+            android:layout_gravity="left" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/DrivingScore"
+            android:id="@+id/MyStat_DrivingScoreTitle"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:textSize="17sp" />
+    </FrameLayout>
+    <View
+        android:id="@+id/Mystat_SplitLine"
+        android:layout_width="match_parent"
+        android:layout_height= "1dp"
+        android:background="@color/WHITE" />
     <!--<ImageView-->
 
         <!--android:layout_width="match_parent"-->

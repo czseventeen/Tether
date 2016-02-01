@@ -4,15 +4,15 @@ package jayxu.com.carassist.MODEL;
  * Created by Yuchen on 12/7/2015.
  */
 public class ItemData {
-    public String mDescription;
+    public String mDescriptionKey;
     public String mValue;
 
-    public String getDescription() {
-        return mDescription;
+    public String getDescriptionKey() {
+        return mDescriptionKey;
     }
 
-    public void setDescription(String mDescription) {
-        this.mDescription = mDescription;
+    public void setDescriptionKey(String mDescription) {
+        this.mDescriptionKey = mDescription;
     }
 
     public String getValue() {

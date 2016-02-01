@@ -68,6 +68,11 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
     private View mLoginFormView;
     private Button mRegisterButton;
     private static final String TAG = RegisterActivity.class.getSimpleName();
+
+    private final ParseObject homeParseObj = new ParseObject(UsefulConstants.ParseClassNameHome);
+    private final ParseObject myCarParseObj = new ParseObject(UsefulConstants.ParseClassNameMyCar);
+    private final ParseObject myStatsParseObj = new ParseObject(UsefulConstants.ParseClassNameMyStats);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -100,20 +105,26 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                 JSONObject home_json = new JSONObject();
                 JSONObject mycar_json = new JSONObject();
                 JSONObject mystats_json = new JSONObject();
+                JSONObject allstats=new JSONObject();
+
                 try {
                     home_json = home.getJSON(RegisterActivity.this);
 
                     mycar_json = mycar.getJSON(RegisterActivity.this);
 
                     mystats_json = mystat.getJSON(RegisterActivity.this);
+                    //putting all data inside the user field as attribute
+                    allstats.put(UsefulConstants.ParseClassNameHome,home_json);
+                    allstats.put(UsefulConstants.ParseClassNameMyCar,mycar_json);
+                    allstats.put(UsefulConstants.ParseClassNameMyStats,mystats_json);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }catch (NullPointerException e){
+                    Log.e(TAG, e.getMessage());
                 }
 
-                final ParseObject homeParseObj = new ParseObject(UsefulConstants.ParseClassNameHome);
-                final ParseObject myCarParseObj = new ParseObject(UsefulConstants.ParseClassNameMyCar);
-                final ParseObject myStatsParseObj = new ParseObject(UsefulConstants.ParseClassNameMyStats);
+
                 //Storing the JSON containing all the stats into an object with an attribute of AllStats, then using cloud code to generate a Obj from the JSON
 
                 // Looping through the JSON to put each JSON object into the ParseObject.
@@ -127,6 +138,7 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                         Log.d(TAG, "Got JSON error!!!!!!!!!!!!"+ e.getMessage());
                     }
                 }
+                homeParseObj.put(UsefulConstants.ParseAttrNameAllStats, home_json);
 
                 Iterator<?> mycar_keys= mycar_json.keys();
                 while(mycar_keys.hasNext()){
@@ -138,6 +150,8 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                         Log.d(TAG, "Got JSON error!!!!!!!!!!!!"+ e.getMessage());
                     }
                 }
+                myCarParseObj.put(UsefulConstants.ParseAttrNameAllStats, mycar_json);
+
 
                 Iterator<?> myStat_keys= mystats_json.keys();
                 while(myStat_keys.hasNext()){
@@ -149,6 +163,7 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
                         Log.d(TAG, "Got JSON error!!!!!!!!!!!!"+ e.getMessage());
                     }
                 }
+                myStatsParseObj.put(UsefulConstants.ParseAttrNameAllStats, mystats_json);
 
 
 //                homeParseObj.put(UsefulConstants.ParseAttrNameAllStats, home_json);
@@ -182,6 +197,9 @@ public class RegisterActivity extends Activity implements LoaderCallbacks<Cursor
 //                user.put("HOME_DATA",homeData);
 //                user.put("MYCAR_DATA",mycarData);
 //                user.put("MYSTAT_DATA",mystatData);
+
+                    user.put(UsefulConstants.ParseAttrNameAllStats, allstats);
+
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {

@@ -23,14 +23,15 @@ public class Home {
     private double UserGPS_X;
     private double UserGPS_Y;
     private String HealthSummary;
+    private double FuelEconomy;
 
 
 
     private static final int MoneySave_max=10000;
-    private static String[] HealthStringArray = {"Is Healthy", "Need Engine Check", "Need Oil Change","Tire Need More Air"};
+    private static String[] HealthStringArray = {"Is Healthy", "Need Engine Check","Tire Need More Air"};
     private Context mContext=null;
     public Home(){
-
+        FuelEconomy = 0;
     }
 
     /*
@@ -43,13 +44,14 @@ public class Home {
             Random r= new Random();
             this.setMoneySavedByDrivingElectric(r.nextInt(MoneySave_max));
 
-            this.setUserGPS_X(r.nextDouble() * 90);
-            this.setUserGPS_Y(r.nextDouble() * 180);
-            this.setCarGPS_X(this.getUserGPS_X()+r.nextDouble()*10);
-            this.setCarGPS_Y(this.getUserGPS_Y()+r.nextDouble()*10);
-            HealthStringArray = new String[] {context.getString(R.string.Healthy), context.getString(R.string.NeedEngineCheck),
-                    context.getString(R.string.NeedOilChange),context.getString(R.string.TireFlat)};
+            this.setUserGPS_X(r.nextDouble()*2+39);
+            this.setUserGPS_Y(r.nextDouble()*2+115);
+            this.setCarGPS_X(this.getUserGPS_X());
+            this.setCarGPS_Y(this.getUserGPS_Y());
+            HealthStringArray = new String[] {context.getString(R.string.Healthy), context.getString(R.string.NeedEngineCheck)
+                    ,context.getString(R.string.TireFlat)};
             this.setHealthSummary(HealthStringArray[r.nextInt(HealthStringArray.length)]);
+            this.setFuelEconomy(r.nextInt(5)+20);
 
         }
 
@@ -57,12 +59,13 @@ public class Home {
 
     public JSONObject getJSON(Context context) throws JSONException {
         JSONObject jsonobj=new JSONObject();
-        jsonobj.put(context.getString(R.string.MoneySavedByDrivingElectric),this.getMoneySavedByDrivingElectric()); //+"$"
-        jsonobj.put(context.getString(R.string.HealthSummary), this.getHealthSummary());
-        jsonobj.put(context.getString(R.string.UserGPS_X), this.getUserGPS_X());
-        jsonobj.put(context.getString(R.string.UserGPS_Y), this.getUserGPS_Y());
-        jsonobj.put(context.getString(R.string.CarGPS_X), this.getCarGPS_X());
-        jsonobj.put(context.getString(R.string.CarGPS_Y), this.getCarGPS_Y());
+        jsonobj.put("MoneySavedByDrivingElectric",this.getMoneySavedByDrivingElectric()); //+"$"
+        jsonobj.put("HealthSummary", this.getHealthSummary());
+        jsonobj.put("UserGPS_X", this.getUserGPS_X());
+        jsonobj.put("UserGPS_Y", this.getUserGPS_Y());
+        jsonobj.put("CarGPS_X", this.getCarGPS_X());
+        jsonobj.put("CarGPS_Y", this.getCarGPS_Y());
+        jsonobj.put("FuelEconomy",this.getFuelEconomy()); //+" MPG"
 
 
         return jsonobj;
@@ -131,9 +134,16 @@ public class Home {
                 +this.getMoneySavedByDrivingElectric()+", and you car is "+HealthSummary+".";
     }
 
+    public double getFuelEconomy() {
+        return FuelEconomy;
+    }
+
+    public void setFuelEconomy(double fuelEconomy) {
+        FuelEconomy = fuelEconomy;
+    }
 /*    public JSONArray generateJSONArray() throws JSONException {
         JSONArray myArray=new JSONArray();
-        myArray.put(jMoneySavedByDrivingElectric,MoneySavedByDrivingElectric);
+        myArray.put(jMoneySavedByDrivingElectric,ParseKey_MoneySavedByDrivingElectric);
         //myArray.put(jCarGPS,CarGPS);
         //myArray.put(jUserGPS,UserGPS);
         myArray.put(jHealth,HealthSummary);

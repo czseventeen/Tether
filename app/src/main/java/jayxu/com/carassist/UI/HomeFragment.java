@@ -1,28 +1,23 @@
 package jayxu.com.carassist.UI;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import jayxu.com.carassist.ADAPTER.MyStatAdapter;
-import jayxu.com.carassist.MODEL.Home;
 import jayxu.com.carassist.MODEL.ItemData;
 import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
@@ -38,6 +33,9 @@ public class HomeFragment extends Fragment {
          */
         private static HomeHexagonView topImage;
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private JSONObject home_results=null;
+         private TextView dialogTitle;
+         private TextView dialogDesc;
 
         private static View rootView;
     /**
@@ -60,41 +58,108 @@ public class HomeFragment extends Fragment {
                                  Bundle savedInstanceState) {
             //Everytime on createView, populate the list with data.
             ParseUser user=ParseUser.getCurrentUser();
-            //retrieve all the data and parse to get data for home only.
-            ParseObject obj=user.getParseObject(UsefulConstants.ParseClassNameHome);
+
+            ArrayList<ItemData> itemData_list=new ArrayList<>();
+            String CarHealth="";
             try {
-//                Log.d(TAG, obj.toString());
+                home_results = user.getJSONObject(UsefulConstants.ParseAttrNameAllStats).getJSONObject(UsefulConstants.ParseClassNameHome);
+            }catch (JSONException e){
+                e.printStackTrace();
             }catch (NullPointerException e){
                 e.printStackTrace();
             }
-            JSONObject home_results=null;
-            ArrayList<ItemData> itemData_list=new ArrayList<>();
-            String CarHealth="";
-//            try {
-//                home_results = user.getJSONObject(getString(R.string.JSON_KEY)).getJSONObject(getString(R.string.Home_JSON_KEY));
-//                if(home_results!=null) {
-//                    Iterator<String> iterator = home_results.keys();
-//                    while (iterator.hasNext()) {
-//                        ItemData temp_item = new ItemData();
-//                        String key = iterator.next();
-//                        temp_item.setDescription(key);
-//                        temp_item.setValue(home_results.getString(key));
-//                        if(key.equals(getString(R.string.HealthSummary))){
-//                            CarHealth=temp_item.getValue();
-//                            continue;
-//                        }
-//                        itemData_list.add(temp_item);
-//                    }
-//                }
-//            }catch (JSONException e){
-//                e.printStackTrace();
-//            }catch (NullPointerException e){
-//                e.printStackTrace();
-//            }
 /*            String results=user.getString("HOME_DATA");
             results=results.replaceAll("\\{","").replaceAll("\\}", "").replaceAll("\"", "");
             String[] array_result=results.split(",");*/
+
             rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+            final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            //Set onclick listener for the 4 icons:
+//            View DialogView=inflater.inflate(R.layout.dialog_details,null);
+//            alert.setView(DialogView);
+            alert.setPositiveButton(R.string.Home_dialog_gotit, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+//                    DialogView.
+                }
+            });
+//            dialogTitle=(TextView) DialogView.findViewById(R.id.Dialog_Title);
+//            dialogDesc=(TextView) DialogView.findViewById(R.id.Dialog_Description);
+
+            ImageView chargeStation_Img=(ImageView)rootView.findViewById(R.id.home_chargeStation);
+            chargeStation_Img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), MapActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            ImageView Wallet_Img=(ImageView)rootView.findViewById(R.id.home_money);
+            Wallet_Img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String moneySave="0";
+                    if(home_results!=null){
+                        try {
+
+                            moneySave=home_results.getString(UsefulConstants.ParseKey_MoneySavedByDrivingElectric)+""+getString(UsefulConstants.UnitMapping.get(UsefulConstants.ParseKey_MoneySavedByDrivingElectric));
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
+                        alert.setTitle(getString(R.string.Home_dialog_MoneyTitle));
+                        alert.setMessage(moneySave);
+                    }
+                    alert.show();
+                }
+            });
+
+
+            ImageView MPG_Img=(ImageView)rootView.findViewById(R.id.home_mpg);
+            MPG_Img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String MPG_Equ="0";
+                    if(home_results!=null){
+                        try {
+                            MPG_Equ=home_results.getString(UsefulConstants.ParseKey_FuelEconmony)+""+getString(UsefulConstants.UnitMapping.get(UsefulConstants.ParseKey_FuelEconmony));
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
+                        alert.setTitle(getString(R.string.Home_dialog_MPGTitle));
+                        alert.setMessage(MPG_Equ);
+                    }
+                    alert.show();
+                }
+            });
+
+            ImageView Health_Img=(ImageView)rootView.findViewById(R.id.home_health);
+            Health_Img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String Health_info="0";
+                    if(home_results!=null){
+                        try {
+                            Health_info=home_results.getString(UsefulConstants.ParseKey_Health)+""+getString(UsefulConstants.UnitMapping.get(UsefulConstants.ParseKey_Health));
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
+                        alert.setTitle(getString(R.string.Home_dialog_HealthTitle));
+                        alert.setMessage(Health_info);
+                    }
+                    alert.show();
+                }
+            });
+
 //Removing recyclerView on 1/18/2016 for new layout design
 //
 //

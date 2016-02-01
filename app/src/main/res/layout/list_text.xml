@@ -2,19 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/item_description"
-        android:textSize="12dp"/>
+        android:textSize="12dp"
+        android:textColor="@color/apptheme_color"
+        android:gravity="center" />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_below="@id/item_description"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Text"
+        android:textColor="@color/WHITE"
         android:id="@+id/item_value"
         android:textSize="12dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="false"
+        android:gravity="center" />
 </RelativeLayout>

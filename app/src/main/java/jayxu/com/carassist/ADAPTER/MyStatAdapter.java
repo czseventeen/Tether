@@ -6,10 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 import jayxu.com.carassist.MODEL.ItemData;
+import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
+import jayxu.com.carassist.UI.ParseApplication;
 
 /**
  * Created by Yuchen on 12/7/2015.
@@ -52,8 +55,10 @@ public class MyStatAdapter extends RecyclerView.Adapter<MyStatAdapter.MyStatView
 
 
     public void bindData(ItemData itemdata){
-        mDescription.setText(itemdata.getDescription());
-        mValue.setText(itemdata.getValue());
+        String KeyString=itemdata.getDescriptionKey();
+        String unit= ParseApplication.resources.getString(UsefulConstants.UnitMapping.get(KeyString));
+        mDescription.setText("< "+ParseApplication.resources.getString(UsefulConstants.Description_Stringmapping.get(KeyString))+" >");
+        mValue.setText(itemdata.getValue()+" "+unit);
     }
     }
 }

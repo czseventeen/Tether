@@ -29,10 +29,18 @@
      <string name="YourCarIs">车况:</string>
         <string name="Healthy">健康</string>
         <string name="NeedEngineCheck">发动机需要检查</string>
-        <string name="NeedOilChange">需要更换机油</string>
+        <string name="NeedOilChange">需要检查电池</string>
         <string name="TireFlat">轮胎气压过低</string>
 
-        <!-- Below are used for My Stat page-->
+    <string name="Home_dialog_gotit">知道了</string>
+    <string name="Home_dialog_MoneyTitle">驾驶电车出行为您总共省下</string>
+    <string name="Home_dialog_MPGTitle">您的相对百公里耗油为</string>
+    <string name="Home_dialog_HealthTitle">您的车况为</string>
+
+
+
+
+    <!-- Below are used for My Stat page-->
         <string name="ProgressCircle_text">Score</string>
 
 
@@ -62,7 +70,7 @@
         <string name="BatteryI">电池电流</string>
         <string name="BatteryR">电池电阻</string>
         <string name="BatteryCapacity">电池容量</string>
-        <string name="FuelEconomy">百公里耗油</string>
+        <string name="FuelEconomy">百公里耗油对等值</string>
         <string name="BatteryTemp">电池温度</string>
         <string name="Brand">品牌</string>
         <string name="SeatingCapacity">标准座位数</string>
@@ -119,4 +127,46 @@
     <!--Map Activity page strings-->
     <string name="UserLocation">您的位置</string>
     <string name="CarLocation">爱车</string>
+
+    <string name="Unit_MoneySavedByDrivingElectric">￥</string>
+    <string name="Unit_HealthSummary" />
+    <string name="Unit_UserGPS_X" />
+    <string name="Unit_UserGPS_Y" />
+    <string name="Unit_CarGPS_X" />
+    <string name="Unit_CarGPS_Y" />
+    <string name="Unit_BatteryLeft">%</string>
+    <string name="Unit_BatteryTemp">C</string>
+    <string name="Unit_BatteryCapacity">千瓦时</string>
+    <string name="Unit_FuelEconomy">升</string>
+    <string name="Unit_Brand" />
+    <string name="Unit_SeatingCapacity" />
+    <string name="Unit_HorsePower"></string>
+    <string name="Unit_MaxRPM">转</string>
+    <string name="Unit_TopSpeed">千米/时</string>
+    <string name="Unit_ZeroToSixtyTime">秒</string>
+    <string name="Unit_EstimateValue">￥</string>
+    <string name="Unit_TotalMilesDriven">千米</string>
+    <string name="Unit_AverageTimeSpentInTrafficDaily">分</string>
+    <string name="Unit_DrivingScore" />
+    <string name="Unit_AverageDailyDriveTime">分</string>
+    <string name="Unit_AverageDailyMilesDriven">千米</string>
+    <string name="Unit_MilesDrivenThisCharge">千米</string>
+    <string name="Unit_TimeDrivenThisCharge">分</string>
+    <string name="Unit_AverageMilesDrivenPerAH">千米</string>
+    <string name="Unit_AverageDrivingTimePerAH">分</string>
+    <string name="Unit_MaxMilesDrivenPerAH">千米</string>
+    <string name="Unit_FastestSpeedDriven">千米/时</string>
+    <string name="Unit_NumOfSuddenBreak">次</string>
+    <string name="Unit_NumOfSuddenAccelerate" >次</string>
+    <string name="Unit_NumOfSuddenTurn">次</string>
+    <string name="Unit_NumOfAccident" >次</string>
+    <string name="Unit_AverageCostPerMile">￥</string>
+    <string name="Unit_TotalDrivingTime">小时</string>
+    <string name="Unit_AverageSpeedDriven">千米/时</string>
+    <string name="Unit_TotalTimeSpentInTraffic">小时</string>
+
+
+
+    <string name="ChargerLocation">充电站</string>
+
 </resources>

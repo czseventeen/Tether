@@ -89,6 +89,7 @@
 <!--</LinearLayout>-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jayxu.com.carassist.UI.HomeFragment"
@@ -100,6 +101,22 @@
         android:id="@+id/HomeHexagonView"
         android:layout_gravity="left|top"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Home_MoneySavedByGoingElectric"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Home_Carhealth"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Home_EquaivlentMPG"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Home_NearbyCharger"/>
 
     <ImageView
         android:layout_width="30dp"
@@ -115,7 +132,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_gas_station"
+        android:src="@drawable/ic_electricity2"
         android:id="@+id/home_chargeStation"/>
     <ImageView
         android:layout_width="30dp"

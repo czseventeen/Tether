@@ -1,6 +1,7 @@
 package jayxu.com.carassist.UI;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseUser;
+
+import java.util.HashMap;
 
 import jayxu.com.carassist.ADAPTER.TabPagerAdapter;
 import jayxu.com.carassist.MODEL.UsefulConstants;
@@ -53,35 +56,37 @@ public class MainActivity extends AppCompatActivity{
 //        tabLayout.setTabTextColors(getResources().getColor(R.color.WHITE), getResources().getColor(R.color.WHITE));
 
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Log.d("~~~~~~", "The tab selected was "+tab.getPosition());
-                if(tab.getPosition()== UsefulConstants.PageIndex_MyCar){
-//                    MyCarFragment.startAnimation();
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-//        ActionBar ab=getSupportActionBar();
+        for(HashMap.Entry<String, Integer> entry : UsefulConstants.Description_Stringmapping.entrySet()){
+            Log.d("+++++++++", entry.getKey() + "/" + entry.getValue());
+        }
+//        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                Log.d("~~~~~~", "The tab selected was "+tab.getPosition());
+//                if(tab.getPosition()== UsefulConstants.PageIndex_MyCar){
+////                    MyCarFragment.startAnimation();
+//                }
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
+        ActionBar ab=getSupportActionBar();
+        ab.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 //        ab.setElevation(0);
 //        ab.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.apptheme_color)));
 //        ab.setTitle("");
-
-
-
-
+        ab.hide();
 
     }
+
    /* protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

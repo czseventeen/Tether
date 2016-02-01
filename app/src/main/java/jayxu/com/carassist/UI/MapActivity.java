@@ -1,8 +1,6 @@
 package jayxu.com.carassist.UI;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,7 +17,9 @@ import com.tencent.tencentmap.mapsdk.map.TencentMap;
 import com.tencent.tencentmap.mapsdk.map.UiSettings;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import jayxu.com.carassist.MODEL.UsefulConstants;
 import jayxu.com.carassist.R;
 
 public class MapActivity extends AppCompatActivity {
@@ -58,22 +58,20 @@ public class MapActivity extends AppCompatActivity {
         double car_x=0.0;
         double car_y=0.0;
         try{
-            user_x=Double.parseDouble(user.getJSONObject(getString(R.string.JSON_KEY))
-                    .getJSONObject(getString(R.string.Home_JSON_KEY))
-                    .getString(getString(R.string.UserGPS_X)));
-            user_y=Double.parseDouble(user.getJSONObject(getString(R.string.JSON_KEY))
-                    .getJSONObject(getString(R.string.Home_JSON_KEY))
-                    .getString(getString(R.string.UserGPS_Y)));
-            car_x=Double.parseDouble(user.getJSONObject(getString(R.string.JSON_KEY))
-                    .getJSONObject(getString(R.string.Home_JSON_KEY))
-                    .getString(getString(R.string.CarGPS_X)));
-            car_y=Double.parseDouble(user.getJSONObject(getString(R.string.JSON_KEY))
-                    .getJSONObject(getString(R.string.Home_JSON_KEY))
-                    .getString(getString(R.string.CarGPS_Y)));
+            JSONObject allstats=user.getJSONObject(UsefulConstants.ParseAttrNameAllStats);
+            JSONObject home_json=allstats.getJSONObject(UsefulConstants.ParseClassNameHome);
+            user_x=(Double)home_json.get(UsefulConstants.ParseKey_UserGPS_X);
+            user_y=(Double)home_json.get(UsefulConstants.ParseKey_UserGPS_Y);
+            car_x=(Double)home_json.get(UsefulConstants.ParseKey_CarGPS_X);
+            car_y=(Double)home_json.get(UsefulConstants.ParseKey_CarGPS_Y);
             Log.d(TAG, "user x is "+user_x+"user y is "+user_y+"car x is "+car_x+" car y is "+car_y);
         }catch (JSONException e){
             Log.d(TAG, e.getMessage());
         }catch (NumberFormatException e){
+            Log.d(TAG, e.getMessage());
+        }catch (NullPointerException e){
+            Log.d(TAG, e.getMessage());
+        }catch (IllegalStateException e){
             Log.d(TAG, e.getMessage());
         }
         //check to see if valid result was returned
@@ -102,6 +100,28 @@ public class MapActivity extends AppCompatActivity {
             marker.showInfoWindow();// 设置默认显示一个infowinfow
         }
 
+        //This is a hack, to display 2 nearby charging stations. Need to remove
+            //TODO - Need to remove for release
+        LatLng charger1= new LatLng(car_x+0.3, car_y+0.3);
+        LatLng charger2=new LatLng(car_x-0.6 , car_y+0.6);
+
+        Marker marker_charger1 = tencentMap.addMarker(new MarkerOptions()
+                .position(charger1)
+                .title(getString(R.string.ChargerLocation))
+                .anchor(0.5f, 0.5f)
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker())
+                .draggable(true));
+        marker_charger1.showInfoWindow();// 设置默认显示一个infowinfow
+
+        Marker marker_charger2 = tencentMap.addMarker(new MarkerOptions()
+                .position(charger2)
+                .title(getString(R.string.ChargerLocation))
+                .anchor(0.5f, 0.5f)
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker())
+                .draggable(true));
+        marker_charger2.showInfoWindow();// 设置默认显示一个infowinfow
 
 
 

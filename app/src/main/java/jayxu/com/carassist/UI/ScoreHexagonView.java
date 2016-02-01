@@ -111,6 +111,9 @@ public class ScoreHexagonView extends View {
         }
 
         Coordinate ViewCenter=mViewDimension.getCenter();
+        //Hard-coding a 20pixel shift downward to make sure text appear correctly.  may need to change this in future for difference screen size
+        ViewCenter.setY(ViewCenter.getY()+20);
+
 
         //Using the center of the View as a referrence point, calculate the bound for the score image by adding/substracting the Hexagon Width/2  and Height/2
         //unlike the battery image, the score image needs to be fitted into a square. thus using the shortest side as a referrence to draw a square in the center

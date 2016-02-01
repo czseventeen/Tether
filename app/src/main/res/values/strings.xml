@@ -30,8 +30,15 @@
     <!-- below are used for the Home class-->
     <string name="Healthy">Healthy</string>
     <string name="NeedEngineCheck">Need Engine Check</string>
-    <string name="NeedOilChange">Need Oil Change</string>
+    <string name="NeedOilChange">Need Check Battery</string>
     <string name="TireFlat">Tire Need More Air</string>
+    <!--Below are for the dialog boxes inside  Home-->
+    <string name="Home_dialog_gotit">Got it</string>
+    <string name="Home_dialog_MoneyTitle">Money you have saved by driving electric: </string>
+    <string name="Home_dialog_MPGTitle">Your Equivalent MPG is: </string>
+    <string name="Home_dialog_HealthTitle">Your Car\'s Current Condition: </string>
+
+
 
     <!-- Below are used for My Stat page-->
     <string name="ProgressCircle_text">Score</string>
@@ -60,7 +67,7 @@
 
     <!-- My Car Page's Strings-->
     <string name="MyCar_JSON_KEY">MyCar</string>
-    <string name="BatteryLeft">Battery left</string>
+    <string name="BatteryLeft">BATTERY LEFT</string>
     <string name="BatteryV">Battery Voltage</string>
     <string name="BatteryI">Battery Current</string>
     <string name="BatteryR">Battery Resistance</string>
@@ -81,7 +88,7 @@
     <string name="MyStat_JSON_KEY">MyStat</string>
 
     <string name="AverageTimeSpentInTrafficDaily">Average time spent in traffic(Daily)</string>
-    <string name="DrivingScore">Driving Score</string>
+    <string name="DrivingScore">DRIVING SCORE</string>
     <string name="AverageDailyDriveTime">Average time spent in car(Daily)</string>
     <string name="AverageDailyMilesDriven">Average miles driven(Daily)</string>
 
@@ -124,4 +131,42 @@
 <!--Map Activity page strings-->
     <string name="UserLocation">Your Location</string>
     <string name="CarLocation">Car\'s Location</string>
+
+    <string name="Unit_MoneySavedByDrivingElectric">$</string>
+    <string name="Unit_HealthSummary" />
+    <string name="Unit_UserGPS_X" />
+    <string name="Unit_UserGPS_Y" />
+    <string name="Unit_CarGPS_X" />
+    <string name="Unit_CarGPS_Y" />
+    <string name="Unit_BatteryLeft">%</string>
+    <string name="Unit_BatteryTemp">F</string>
+    <string name="Unit_BatteryCapacity">kWh</string>
+    <string name="Unit_FuelEconomy">MPG</string>
+    <string name="Unit_Brand" />
+    <string name="Unit_SeatingCapacity" />
+    <string name="Unit_HorsePower">HP</string>
+    <string name="Unit_MaxRPM">RPM</string>
+    <string name="Unit_TopSpeed">MPH</string>
+    <string name="Unit_ZeroToSixtyTime">s</string>
+    <string name="Unit_EstimateValue">$</string>
+    <string name="Unit_TotalMilesDriven">Mi</string>
+    <string name="Unit_AverageTimeSpentInTrafficDaily">min</string>
+    <string name="Unit_DrivingScore" />
+    <string name="Unit_AverageDailyDriveTime">min</string>
+    <string name="Unit_AverageDailyMilesDriven">mi</string>
+    <string name="Unit_MilesDrivenThisCharge">mi</string>
+    <string name="Unit_TimeDrivenThisCharge">min</string>
+    <string name="Unit_AverageMilesDrivenPerAH">mi</string>
+    <string name="Unit_AverageDrivingTimePerAH">min</string>
+    <string name="Unit_MaxMilesDrivenPerAH">mi</string>
+    <string name="Unit_FastestSpeedDriven">MPH</string>
+    <string name="Unit_NumOfSuddenBreak" />
+    <string name="Unit_NumOfSuddenAccelerate" />
+    <string name="Unit_NumOfSuddenTurn" />
+    <string name="Unit_NumOfAccident" />
+    <string name="Unit_AverageCostPerMile">$</string>
+    <string name="Unit_TotalDrivingTime">Hours</string>
+    <string name="Unit_AverageSpeedDriven">MPH</string>
+    <string name="Unit_TotalTimeSpentInTraffic">Hours</string>
+    <string name="ChargerLocation">Charger</string>
 </resources>
